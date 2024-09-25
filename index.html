@@ -1,0 +1,371 @@
+<!DOCTYPE HTML>
+<html lang = "en">
+	<head>
+		<title>Plants Vs Zombies</title>
+		<style>
+			canvas {
+				border:1px black solid;
+				position:absolute;
+				top:0;
+				left:0;
+			}
+		</style>
+		<script src="scripts/plants.js"></script>
+	</head>
+	<body>	
+	</body>
+</html>
+<script>
+	gamefield = {
+        background: "#bff9a2",
+		numX:15,
+		numY:10,
+		playgroundWidth:80,
+		playgroundHeight:80,
+		gamefield:[],
+		fill:function(field){
+			for(var i=0;i<this.numY;i++){
+				var helper=[];
+				for(var j=0;j<this.numX;j++){
+					helper.push(0);
+				}
+				field.push(helper);
+			};
+		},
+		draw:function(){
+			context.beginPath();
+			context.rect(0, 0, this.numX*this.playgroundWidth, canvas.height);
+			context.fillStyle = this.background;
+			context.fill();
+		}
+	};
+	
+	sidebar={
+		background:"#e6f7de",
+		draw:function(){
+			
+			/* Draw sidebar */
+			context.beginPath();
+			context.rect(gamefield.numX*gamefield.playgroundWidth, 0, 4.5*gamefield.playgroundWidth, canvas.height);
+			context.fillStyle = this.background;
+			context.fill();
+
+			/* Draw suns */
+			
+			context.font = 'italic 35pt Calibri';
+			context.fillStyle = 'black';
+			context.fillText("Suns: "+snumb, (gamefield.numX*gamefield.playgroundWidth+10), 45);
+            context.fillText("Cost", (gamefield.numX*gamefield.playgroundWidth+250), 45 )
+			
+			/* Draw plants */
+			
+			for(var i in this.plants){
+				var objective =this.plants[i];
+				objective.image.src="images/"+objective.img;								
+				if(player.select[0]==objective.name){
+					context.beginPath();
+					context.rect(objective.x, objective.y, gamefield.playgroundWidth, gamefield.playgroundHeight);
+				    context.fillStyle = '#444';
+				    context.fill();
+				}
+				context.drawImage(objective.image,objective.x,objective.y,gamefield.playgroundWidth,gamefield.playgroundHeight);
+			}
+		},
+		
+		/* List of plants and cost for them*/
+		
+		plants:{
+			0:{
+				id:"a",
+				image : new Image(),
+				img: "SunflowerHD.png",
+				name:"sunflower",
+				x:1250,
+				y:65
+			},
+			1:{
+				id:"b",
+				image : new Image(),
+				img: "PeashooterHD.png",
+				name:"peashooter",
+				x:1250,
+				y:65+90
+			},
+			2:{
+				id:"c",
+				image : new Image(),
+				img: "WallnutHD.png",
+				name:"wallnut",
+				x:1250,
+				y:65+180
+			},
+            3:{
+                id:"d",
+                image : new Image(),
+                img: "25.jpg",
+                name: "cost25",
+                x:1450,
+                y:65
+              },
+            4:{
+                id:"e",
+                image : new Image(),
+                img: "50.jpg",
+                name: "cost50",
+                x:1450,
+                y:65+90
+              },
+            5:{
+                id:"f",
+                image : new Image(),
+                img: "100.jpg",
+                name: "cost100",
+                x:1450,
+                y:65+180
+              }
+		}
+	};
+	
+	player={
+		select:false
+	};
+	
+	function init(){
+		
+		/* Canvas */
+		
+		canvas= document.createElement("canvas");
+		canvas.width=window.innerWidth;
+		canvas.height=window.innerHeight;
+		document.body.appendChild(canvas);
+		context = canvas.getContext('2d');
+			
+		/* Variables */
+		
+		isPlaying=false;
+		ticks=0;
+		snumb=200;
+		lastZombieAdd=Date.now();
+		
+		/* Arrays */
+		
+		plants=[];
+		zombies=[];
+		suns=[];
+		shots=[];
+		
+		/* Functions */
+		
+		gamefield.fill(gamefield.gamefield);
+		
+	}
+
+	function mainLoop(){
+		
+		check();
+		spawn();
+		draw();
+		move();
+		ticks++;
+		
+		if(isPlaying){
+			requestAnimationFrame(mainLoop);
+		}
+	}
+
+	function draw(){
+		
+		/* Draw game field */
+		
+		gamefield.draw();
+		
+		/* Draw Plants */
+        
+		for(var i in plants){
+			plants[i].draw();
+		}
+		
+		/* Draw zombies */
+		
+		for(var i in zombies){
+			zombies[i].draw();
+		}
+		
+		/* Draw shots */
+		
+		for(var i in shots){
+			shots[i].draw();
+		}
+		
+		/* Draw suns */
+		
+		for(var i in suns){
+			suns[i].draw();
+		}
+		
+		/* Draw sidebar */
+		
+		sidebar.draw();
+	}
+
+	function move(){
+		
+		/* Move zombies */
+		
+		for(var i in zombies){
+			zombies[i].move();
+		}
+		
+		/* Move suns */
+		
+		for(var i in suns){
+			suns[i].move();
+		}
+		
+		/* Move shots */
+		
+		for(var i in shots){
+			shots[i].move();
+		}
+	}
+
+	function check(){
+		
+		/*Check if plant shots or produce suns*/
+		
+		for(var i in plants){
+			if(typeof(plants[i].checkGettingSun) === "function"){
+				plants[i].checkGettingSun();
+			}
+			if(typeof(plants[i].checkShot) === "function"){
+				plants[i].checkShot();
+			}
+		}
+		i=0;
+		
+		/* Check suns life */
+		
+		for(var i in suns){
+			if(suns[i].checkLife()){
+				suns.splice(i,1);
+			}
+		}
+		i=0;
+		
+		/* Check if shot hit the target */
+		
+		for(var i in shots){
+			var objective=shots[i];	
+			if(typeof(objective.checkColision) === "function"){		
+				if(objective.checkColision()){
+					shots.splice(i,1);
+					continue;	
+				}
+			}
+			if(typeof(objective.life) != "undefined"){
+				if(objective.life<0){
+					objective.target.healt--;
+					if(objective.target.healt<=0){
+						zombies.splice(zombies.indexOf(objective.target),1);
+					}
+					shots.splice(i,1);
+					continue;	
+				}
+			}
+			if(objective.x-objective.range>=gamefield.numX*gamefield.playgroundWidth){
+				shots.splice(i,1);
+			}
+		}
+		i=0;
+		
+		
+		for(var i in zombies){
+			zombies[i].checkBite();
+		}
+	}
+	
+	function spawn(){
+		
+		/* Add new zombie every 10 seconds*/
+		
+		if(Date.now()-lastZombieAdd>=10000){
+			var row=Math.floor(Math.random()*10);
+			zombies.push(new walker((gamefield.numX*gamefield.playgroundWidth+40),row*gamefield.playgroundHeight));
+			lastZombieAdd=Date.now();
+		}
+	}
+	
+	function click(data){
+		
+		/* If click in sidebar */
+		
+		for(var j in sidebar.plants){
+			var objective=sidebar.plants[j];
+			var X=data.clientX;
+			var Y=data.clientY;
+			var click=((X>objective.x)&&(X<objective.x+gamefield.playgroundWidth)&&(Y>objective.y)&&(Y<objective.y+gamefield.playgroundHeight));
+			if(click){
+				if(player.select[0]==objective["name"]){
+					player.select=false;
+					break;
+				}
+				else{
+					if(snumb-window[objective["name"]].prototype.cost>=0){
+						player.select=[objective["name"],objective["id"]];
+						break;
+					}
+				}
+			}
+		}
+		
+		/* If click in sun */
+		
+		for(var i in suns){
+			var objective=suns[i];
+			if(clickIn(X,Y,objective)){
+				snumb+=objective.suns;
+				suns.splice(i,1);
+				return true;
+			}
+		}
+		
+		/* If click in the game field */
+		
+		if((data.x>=0)&&(data.x<=gamefield.numX*gamefield.playgroundWidth)&&(data.y>=0)&&(data.y<=gamefield.numY*gamefield.playgroundHeight)&&(player.select)){
+			var Xko=Math.floor(X/gamefield.playgroundWidth);
+			var Yko=Math.floor(Y/gamefield.playgroundHeight);
+			if(gamefield.gamefield[Yko][Xko]!=0){
+				return false;
+			}
+			plants.push(new window[player.select[0]](data.clientX,data.clientY));
+			gamefield.gamefield[Yko][Xko]=player.select[1];
+			player.select=false;			
+		}
+	}
+	
+	function colision(a,b){
+  		if((b.x+b.width>a.x)&&
+    		(b.y+b.height>a.y)&&
+    		(b.x<a.x+a.width)&&
+    		(b.y<a.y+a.height)){
+    		return 1;
+  		}  
+		return 0;
+	}
+	
+	function clickIn(x,y,obj){
+		if((obj.x<x)&&(obj.x+obj.range*2>x)&&(obj.y<y)&&(obj.y+obj.range*2>y)){
+			return 1;
+		}
+		return 0;
+	}
+	
+	window.onclick=function(d){
+		click(d);
+	};
+	
+	init();
+	isPlaying=true;
+	mainLoop();
+	
+</script>
