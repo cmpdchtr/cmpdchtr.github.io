@@ -4,17 +4,14 @@ document.addEventListener("DOMContentLoaded", () => {
   const settingsBtn = document.getElementById("settings-btn");
   const settingsMenu = document.getElementById("settings-menu");
   const darkThemeToggle = document.getElementById("dark-theme-toggle");
-  const nsfwToggle = document.getElementById("nsfw-toggle");
 
   const fetchCatgirl = async () => {
     imageContainer.innerHTML = "<p>Завантаження...</p>";
 
     try {
-      // Визначаємо URL залежно від режиму NSFW
-      const isNsfw = nsfwToggle.checked;
-      const category = "neko";
-      const type = isNsfw ? "nsfw" : "sfw";
-      const apiUrl = `https://api.waifu.pics/${type}/${category}`;
+      // Використовуємо надійний waifu.pics API, який не потребує CORS-проксі.
+      // Завжди запитуємо SFW контент.
+      const apiUrl = "https://api.waifu.pics/sfw/neko";
 
       const response = await fetch(apiUrl);
 
@@ -88,22 +85,12 @@ document.addEventListener("DOMContentLoaded", () => {
     applyTheme(isDark);
   });
 
-  // --- NSFW режим ---
-  nsfwToggle.addEventListener("change", () => {
-    localStorage.setItem("nsfwMode", nsfwToggle.checked);
-    fetchCatgirl(); // Оновлюємо картинку одразу
-  });
-
   // --- Ініціалізація ---
   const initialize = () => {
     // Застосовуємо тему
     const savedTheme = localStorage.getItem("darkTheme") === "true";
     darkThemeToggle.checked = savedTheme;
     applyTheme(savedTheme);
-
-    // Встановлюємо перемикач NSFW
-    const savedNsfw = localStorage.getItem("nsfwMode") === "true";
-    nsfwToggle.checked = savedNsfw;
 
     // Завантажуємо перше зображення
     fetchCatgirl();
