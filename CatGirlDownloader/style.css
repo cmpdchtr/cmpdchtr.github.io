@@ -1,0 +1,223 @@
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+body {
+    font-family:
+        -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial,
+        sans-serif;
+    background-color: var(--body-bg);
+    display: flex;
+    flex-direction: column; /* Змінено на column */
+    min-height: 100vh; /* Використовуємо min-height для футера внизу */
+    margin: 0;
+    color: var(--text-color);
+    transition:
+        background-color 0.3s,
+        color 0.3s;
+}
+
+.container {
+    text-align: center;
+    background-color: var(--container-bg);
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    width: 90%;
+    transition: background-color 0.3s;
+    flex-grow: 1; /* Додано, щоб контейнер займав доступний простір */
+    margin: 0 auto; /* Центрує контейнер по горизонталі */
+}
+
+h1 {
+    color: var(--header-color); /* Рожевий колір для заголовка */
+    margin-bottom: 1.5rem;
+}
+
+/* --- Footer --- */
+footer {
+    padding: 1rem;
+    text-align: center;
+    margin-top: auto; /* Притискає футер до низу */
+    color: var(--text-color);
+    width: 100%;
+    transition: color 0.3s;
+}
+
+.footer-text a {
+    color: var(--text-color); /* Колір посилання як основний текст */
+    text-decoration: none;
+    font-size: 0.9rem;
+    opacity: 0.7;
+    transition:
+        color 0.3s,
+        opacity 0.2s;
+}
+
+.footer-text a:hover {
+    color: var(--primary-color); /* Колір при наведенні */
+    opacity: 1;
+}
+
+#image-container {
+    width: 100%;
+    height: 400px;
+    border: 2px dashed var(--image-container-border);
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--image-container-bg);
+    color: var(--image-container-text);
+    overflow: hidden; /* Щоб зображення не виходило за межі */
+    transition:
+        background-color 0.3s,
+        border-color 0.3s;
+}
+
+#image-container img {
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 6px;
+    display: block;
+}
+
+#download-btn {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 1rem 1.5rem;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    transition:
+        background-color 0.3s ease,
+        transform 0.2s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#download-btn:hover {
+    background-color: var(--primary-color-hover);
+    transform: translateY(-2px);
+}
+
+#download-btn:active {
+    background-color: var(--primary-color-active);
+    transform: translateY(0);
+}
+
+/* --- Settings --- */
+#settings-btn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    font-size: 2rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    z-index: 1001;
+    color: var(--text-color);
+    transition: transform 0.2s;
+}
+
+#settings-btn:hover {
+    transform: rotate(30deg);
+}
+
+.settings-menu {
+    position: fixed;
+    top: 0;
+    right: -300px; /* Початково сховано за екраном */
+    width: 280px;
+    height: 100%;
+    background-color: var(--container-bg);
+    box-shadow: -4px 0 15px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    transition:
+        right 0.4s ease-in-out,
+        background-color 0.3s;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.settings-menu.open {
+    right: 0; /* Виїжджає на екран */
+}
+
+.settings-menu h2 {
+    margin-top: 40px;
+    color: var(--header-color);
+    text-align: center;
+}
+
+.setting {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.1rem;
+}
+
+/* --- Custom Toggle Switch --- */
+.setting input[type="checkbox"] {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 50px;
+    height: 28px;
+    background-color: var(--image-container-border);
+    border-radius: 25px;
+    position: relative;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.setting input[type="checkbox"]::before {
+    content: "";
+    position: absolute;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background-color: white;
+    top: 3px;
+    left: 4px;
+    transition: transform 0.3s;
+}
+
+.setting input[type="checkbox"]:checked {
+    background-color: var(--primary-color);
+}
+
+.setting input[type="checkbox"]:checked::before {
+    transform: translateX(21px);
+}
+
+/* --- Theme Variables --- */
+:root {
+    --primary-color: #ff69b4;
+    --primary-color-hover: #ff85c1;
+    --primary-color-active: #e65da2;
+
+    --body-bg: #f0f2f5;
+    --container-bg: #fff;
+    --text-color: #333;
+    --header-color: var(--primary-color);
+    --image-container-bg: #fafafa;
+    --image-container-border: #ddd;
+    --image-container-text: #aaa;
+}
+
+body.dark-theme {
+    --body-bg: #18191a;
+    --container-bg: #242526;
+    --text-color: #e4e6eb;
+    --header-color: var(--primary-color);
+    --image-container-bg: #3a3b3c;
+    --image-container-border: #4d4e4f;
+    --image-container-text: #b0b3b8;
+}
