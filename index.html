@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="uk">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <title>Портфоліо — Minimal · Gruvbox</title>
+        <meta
+            name="description"
+            content="Мінімалістичне портфоліо у темі gruvbox. Автоскáнування підпапок репозиторію для переліку проєктів."
+        />
+
+        <!-- Якщо потрібно, можна додати ці мета-теги для явно вказаного репозиторію:
+       <meta name="gh-owner" content="cmpdchtr">
+       <meta name="gh-repo"  content="cmpdchtr.github.io">
+  -->
+
+        <link rel="stylesheet" href="style.css" />
+    </head>
+    <body>
+        <div class="container wrap" role="document">
+            <main class="site-main" role="main" aria-labelledby="site-title">
+                <header class="header" role="banner">
+                    <div class="brand" title="Портфоліо">
+                        <div class="logo" aria-hidden="true">PG</div>
+                        <div>
+                            <h1 id="site-title" class="site-title">
+                                Твоє Ім'я
+                            </h1>
+                            <p class="site-sub lead">
+                                ПИЗДАТИЙ мінімалістичний портфоліо — gruvbox
+                            </p>
+                        </div>
+                    </div>
+
+                    <div
+                        class="controls"
+                        role="navigation"
+                        aria-label="Керування сайтом"
+                    >
+                        <button
+                            id="refresh-btn"
+                            class="btn ghost"
+                            title="Оновити список"
+                        >
+                            Оновити
+                        </button>
+                        <button
+                            id="theme-btn"
+                            class="btn"
+                            title="Світла / Темна тема"
+                        >
+                            Тема
+                        </button>
+                    </div>
+                </header>
+
+                <section
+                    id="overview"
+                    class="card"
+                    aria-labelledby="overview-title"
+                >
+                    <h2 id="overview-title">Про сайт</h2>
+                    <p class="muted">
+                        Цей сайт автоматично шукає підпапки в репозиторії та
+                        показує їх як проєкти. Можна перемикати режим отримання
+                        (GitHub API або локально), показувати сховані папки
+                        тощо.
+                    </p>
+                </section>
+
+                <section
+                    id="projects-section"
+                    class="card"
+                    aria-labelledby="projects-title"
+                    style="margin-top: 16px"
+                >
+                    <h2 id="projects-title">Проєкти / Сторінки</h2>
+                    <p class="muted small">
+                        Натисни на карточку, щоб перейти до відповідної папки.
+                    </p>
+
+                    <!-- Контейнер, куди підтягується список папок -->
+                    <div
+                        id="projects"
+                        class="grid"
+                        aria-live="polite"
+                        aria-busy="false"
+                    >
+                        <div class="muted">Завантаження списку…</div>
+                    </div>
+
+                    <div class="meta" style="margin-top: 12px">
+                        <span class="status muted" id="status">Готово</span>
+                        <div style="display: flex; gap: 8px">
+                            <button
+                                id="show-hidden-btn"
+                                class="btn ghost small"
+                                title="Показати сховані"
+                            >
+                                Показати сховані
+                            </button>
+                            <button
+                                id="use-api-btn"
+                                class="btn small"
+                                title="Переключити між GitHub API та локальним режимом"
+                            >
+                                Використати GitHub API
+                            </button>
+                        </div>
+                    </div>
+                </section>
+
+                <section
+                    id="contact"
+                    class="card"
+                    style="margin-top: 16px"
+                    aria-labelledby="contact-title"
+                >
+                    <h2 id="contact-title">Контакт</h2>
+                    <p class="muted">
+                        Telegram:
+                        <a
+                            class="link"
+                            href="https://t.me/cmpdchtr_main"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            >@cmpdchtr</a
+                        >
+                    </p>
+                </section>
+
+                <footer class="footer" style="margin-top: 18px">
+                    <small class="muted"
+                        >© <span id="year"></span> Твоє Ім'я — Minimal ·
+                        Gruvbox</small
+                    >
+                </footer>
+            </main>
+
+            <aside
+                class="sidebar"
+                role="complementary"
+                aria-labelledby="about-title"
+            >
+                <h3 id="about-title">Про проєкт</h3>
+                <p class="muted small">
+                    Легкий статичний портфоліо у стилі gruvbox. Сканує підпапки
+                    репозиторію і намагається зчитати назву/опис з локального
+                    <code>index.html</code> або з GitHub (README.md /
+                    index.html).
+                </p>
+
+                <hr
+                    style="
+                        border: none;
+                        height: 1px;
+                        background: rgba(0, 0, 0, 0.06);
+                        margin: 12px 0;
+                    "
+                />
+
+                <div class="kv">
+                    <div class="muted small">Власник / репо</div>
+                    <div id="repo-info" style="font-weight: 700">...</div>
+                </div>
+
+                <div style="margin-top: 12px">
+                    <div class="muted small">Налаштування</div>
+                    <div style="display: flex; gap: 8px; margin-top: 8px">
+                        <button
+                            id="show-hidden-btn-2"
+                            class="hidden btn ghost small"
+                            style="display: none"
+                        >
+                            (запасна кнопка)
+                        </button>
+                    </div>
+                </div>
+            </aside>
+        </div>
+
+        <script>
+            // Minimal page glue: set current year and ensure duplicate controls map correctly to expected IDs.
+            (function () {
+                const y = new Date().getFullYear();
+                const yearEl = document.getElementById("year");
+                if (yearEl) yearEl.textContent = y;
+
+                // Ensure there is exactly one show-hidden button id expected by script.js
+                const primary = document.getElementById("show-hidden-btn");
+                const alt = document.getElementById("show-hidden-btn-2");
+                if (!primary && alt) alt.id = "show-hidden-btn";
+
+                // Ensure projects container exists (script.js will create it if missing)
+                if (!document.getElementById("projects")) {
+                    const container = document.createElement("div");
+                    container.id = "projects";
+                    container.className = "grid";
+                    const insertAfter =
+                        document.querySelector("#projects-section") ||
+                        document.querySelector("main");
+                    insertAfter && insertAfter.appendChild(container);
+                }
+            })();
+        </script>
+
+        <script src="script.js" defer></script>
+    </body>
+</html>

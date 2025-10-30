@@ -1,0 +1,311 @@
+/* Gruvbox-inspired stylesheet for root site
+   Purpose: Minimalist portfolio theme (gruvbox colors), responsive, accessible,
+   and pairs with the generated index.html in the repo root.
+*/
+
+/* -------------------------
+   Palette (gruvbox-ish)
+   ------------------------- */
+:root {
+  --bg-dark: #282828;    /* background */
+  --bg-light: #fbf1c7;
+  --panel:    #32302f;   /* card/panel background */
+  --panel-2:  #3c3836;
+  --fg:       #ebdbb2;   /* foreground text */
+  --muted:    #928374;   /* subtle text */
+  --accent1:  #fb4934;   /* bright red */
+  --accent2:  #fabd2f;   /* yellow/orange */
+  --accent3:  #b8bb26;   /* green */
+  --accent4:  #83a598;   /* blue-ish */
+  --glass:    rgba(255,255,255,0.03);
+  --shadow:   rgba(0,0,0,0.45);
+
+  --radius:   12px;
+  --max-width: 980px;
+  --content-gap: 18px;
+
+  /* typographic scale */
+  --font-base-size: 16px;
+  --line-height: 1.45;
+}
+
+/* Light mode variant */
+:root.light {
+  --bg-dark: #fbf1c7;
+  --panel:   #f2e5c9;
+  --panel-2: #eee1b3;
+  --fg:      #3c3836;
+  --muted:   #7c6f64;
+  --glass:   rgba(0,0,0,0.03);
+  --shadow:  rgba(0,0,0,0.12);
+}
+
+/* -------------------------
+   Base reset + layout
+   ------------------------- */
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html, body { height: 100%; }
+
+body {
+  margin: 0;
+  background: var(--bg-dark);
+  color: var(--fg);
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: var(--font-base-size);
+  line-height: var(--line-height);
+  display: flex;
+  justify-content: center;
+  padding: 48px 20px;
+}
+
+/* Centering container */
+.container,
+.wrap {
+  width: 100%;
+  max-width: var(--max-width);
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+}
+
+/* Main panel */
+main.site-main {
+  flex: 1 1 640px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), transparent), var(--panel);
+  border-radius: var(--radius);
+  padding: 26px;
+  box-shadow: 0 10px 30px var(--shadow);
+  min-height: 320px;
+}
+
+/* Sticky aside */
+aside.sidebar {
+  width: 320px;
+  min-width: 220px;
+  align-self: flex-start;
+  background: linear-gradient(180deg, rgba(0,0,0,0.02), transparent), var(--panel);
+  padding: 18px;
+  border-radius: var(--radius);
+  position: sticky;
+  top: 48px;
+  height: fit-content;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+}
+
+/* -------------------------
+   Header / Brand
+   ------------------------- */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 12px;
+}
+
+.brand {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+}
+
+.logo {
+  width: 52px;
+  height: 52px;
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+  font-weight: 700;
+  color: var(--panel);
+  font-family: "Courier New", monospace;
+  background: linear-gradient(135deg, var(--accent1), var(--accent2));
+  box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+}
+
+.site-title {
+  margin: 0;
+  font-size: 1.25rem;
+}
+
+.site-sub {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+/* -------------------------
+   Buttons / controls
+   ------------------------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.06);
+  color: inherit;
+  padding: 8px 12px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: transform .12s ease, box-shadow .12s ease, background-color .12s ease;
+  text-decoration: none;
+}
+
+.btn:hover { transform: translateY(-2px); }
+.btn:active { transform: translateY(0); }
+
+.btn.ghost {
+  background: var(--glass);
+  border: 1px solid rgba(255,255,255,0.05);
+}
+
+.btn.accent {
+  background: linear-gradient(90deg, var(--accent2), var(--accent1));
+  color: var(--panel);
+  border: none;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.2);
+}
+
+/* -------------------------
+   Cards / grid
+   ------------------------- */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 14px;
+  margin-top: 18px;
+}
+
+.card {
+  background: linear-gradient(180deg, rgba(0,0,0,0.03), transparent);
+  border-radius: 12px;
+  padding: 14px;
+  min-height: 92px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  border: 1px solid rgba(0,0,0,0.06);
+  color: inherit;
+  text-decoration: none;
+}
+
+.card h3 { margin: 0; font-size: 1rem; }
+.card p { margin: 0; color: var(--muted); font-size: .95rem; }
+
+/* project link card */
+.card.link { cursor: pointer; display: block; }
+
+/* small metadata row at card bottom */
+.card .meta {
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.pill {
+  padding: 6px 9px;
+  background: var(--accent2);
+  color: var(--panel);
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: .82rem;
+}
+
+/* -------------------------
+   Text utilities
+   ------------------------- */
+.muted { color: var(--muted); }
+.small  { font-size: .88rem; }
+.lead   { font-size: 1rem; color: var(--muted); }
+
+/* links */
+a,
+a:link,
+a:visited { color: inherit; text-decoration: none; }
+a:hover { color: var(--accent4); text-decoration: underline; }
+
+/* -------------------------
+   Footer
+   ------------------------- */
+.footer {
+  margin-top: 18px;
+  color: var(--muted);
+  font-size: .85rem;
+  text-align: center;
+}
+
+/* -------------------------
+   Accessibility & focus
+   ------------------------- */
+:focus {
+  outline: 3px solid rgba(251,73,52,0.14);
+  outline-offset: 2px;
+}
+
+/* High contrast focus for keyboard users */
+a:focus, button:focus {
+  box-shadow: 0 0 0 4px rgba(250,189,47,0.12);
+}
+
+/* -------------------------
+   Responsive
+   ------------------------- */
+@media (max-width: 900px) {
+  .container, .wrap { flex-direction: column; padding: 12px; gap: 12px; }
+  aside.sidebar { width: 100%; position: relative; top: auto; }
+  .logo { width: 44px; height: 44px; }
+}
+
+/* -------------------------
+   Small helpers
+   ------------------------- */
+.center { text-align: center; }
+.hidden { display: none !important; }
+.kv { display:flex; gap:8px; align-items:center; justify-content:space-between; }
+
+/* -------------------------
+   Optional: subtle animations
+   ------------------------- */
+.fade-in {
+  animation: fadeIn .36s ease both;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* -------------------------
+   Specific tweaks for repo root pages
+   ------------------------- */
+/* make sure embedded project cards, previews, and lists look consistent */
+.projects-list { display: grid; gap: 12px; }
+.project-preview {
+  display:flex;
+  gap:12px;
+  align-items:center;
+}
+.project-preview img {
+  width: 72px;
+  height: 48px;
+  object-fit: cover;
+  border-radius: 8px;
+  flex-shrink: 0;
+  border: 1px solid rgba(0,0,0,0.06);
+}
+
+/* small status badge */
+.status {
+  font-size: .78rem;
+  color: var(--muted);
+}
+
+/* -------------------------
+   End of file
+   ------------------------- */
