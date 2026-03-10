@@ -1,0 +1,2058 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔥 КалічКулятор 3000 🔥 — НАЙКРАЩИЙ калькулятор у ВСЕСВІТІ</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Comic+Neue:wght@700&display=swap');
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --chaos: 0;
+        }
+
+        body {
+            font-family: 'Comic Neue', 'Comic Sans MS', cursive;
+            background: linear-gradient(45deg, #ff006e, #8338ec, #3a86ff, #06d6a0, #ffbe0b);
+            background-size: 400% 400%;
+            animation: bgChaos 3s ease infinite;
+            min-height: 100vh;
+            overflow-x: hidden;
+            cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='48' viewport='0 0 100 100' style='fill:black;font-size:24px;'><text y='50%'>🤡</text></svg>") 16 0, auto;
+        }
+
+        @keyframes bgChaos {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            10% { transform: translateX(-5px) rotate(-1deg); }
+            20% { transform: translateX(5px) rotate(1deg); }
+            30% { transform: translateX(-5px) rotate(-1deg); }
+            40% { transform: translateX(5px) rotate(1deg); }
+            50% { transform: translateX(-3px); }
+            60% { transform: translateX(3px); }
+            70% { transform: translateX(-2px); }
+            80% { transform: translateX(2px); }
+            90% { transform: translateX(-1px); }
+        }
+
+        @keyframes rainbow {
+            0% { color: red; }
+            14% { color: orange; }
+            28% { color: yellow; }
+            42% { color: green; }
+            57% { color: blue; }
+            71% { color: indigo; }
+            85% { color: violet; }
+            100% { color: red; }
+        }
+
+        @keyframes spin { 
+            from { transform: rotate(0deg); } 
+            to { transform: rotate(360deg); } 
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes glitch {
+            0% { transform: translate(0); }
+            20% { transform: translate(-2px, 2px); }
+            40% { transform: translate(-2px, -2px); }
+            60% { transform: translate(2px, 2px); }
+            80% { transform: translate(2px, -2px); }
+            100% { transform: translate(0); }
+        }
+
+        @keyframes marquee {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+
+        @keyframes popIn {
+            0% { transform: scale(0) rotate(720deg); opacity: 0; }
+            100% { transform: scale(1) rotate(0deg); opacity: 1; }
+        }
+
+        @keyframes neonPulse {
+            0%, 100% { text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 20px #ff00de, 0 0 30px #ff00de, 0 0 40px #ff00de; }
+            50% { text-shadow: 0 0 2px #fff, 0 0 5px #fff, 0 0 10px #ff00de, 0 0 15px #ff00de, 0 0 20px #ff00de; }
+        }
+
+        /* MARQUEE BANNER */
+        .marquee-banner {
+            background: red;
+            color: yellow;
+            font-size: 18px;
+            font-weight: bold;
+            padding: 8px 0;
+            overflow: hidden;
+            white-space: nowrap;
+            font-family: 'Press Start 2P', monospace;
+            border-bottom: 3px dashed lime;
+        }
+        .marquee-banner span {
+            display: inline-block;
+            animation: marquee 15s linear infinite;
+        }
+
+        /* HEADER */
+        .header {
+            text-align: center;
+            padding: 20px;
+            position: relative;
+        }
+        .header h1 {
+            font-family: 'Press Start 2P', monospace;
+            font-size: 2.5em;
+            animation: rainbow 2s linear infinite, neonPulse 1.5s ease-in-out infinite;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 10px;
+        }
+        .header .subtitle {
+            font-size: 1.2em;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .visitor-counter {
+            background: black;
+            color: lime;
+            font-family: 'Press Start 2P', monospace;
+            font-size: 12px;
+            padding: 8px 15px;
+            display: inline-block;
+            margin: 10px;
+            border: 2px solid lime;
+            animation: blink 1s step-end infinite;
+        }
+
+        /* COOKIE CONSENT FROM HELL */
+        .cookie-hell {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            color: white;
+            padding: 30px;
+            z-index: 9998;
+            border-top: 5px solid #ff006e;
+            max-height: 70vh;
+            overflow-y: auto;
+            transition: all 0.5s;
+        }
+        .cookie-hell h2 {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            animation: rainbow 3s linear infinite;
+        }
+        .cookie-hell .cookie-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 10px;
+            margin: 15px 0;
+        }
+        .cookie-hell .cookie-option {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 8px;
+            font-size: 13px;
+        }
+        .cookie-hell .cookie-option input { width: 20px; height: 20px; }
+        .cookie-btn {
+            padding: 12px 30px;
+            font-size: 16px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            margin: 5px;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+        .cookie-accept { background: lime; color: black; font-size: 8px; }
+        .cookie-reject { background: red; color: white; font-size: 28px; padding: 20px 60px; animation: shake 0.5s infinite; }
+        .cookie-reject:hover { transform: scale(0.1); opacity: 0.1; }
+
+        /* MAIN APP */
+        .app-container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            position: relative;
+        }
+
+        /* FAKE AD BANNERS */
+        .ad-banner {
+            background: linear-gradient(135deg, #ff6b6b, #ffa500);
+            border: 3px dashed yellow;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 15px 0;
+            text-align: center;
+            animation: shake 2s infinite;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        .ad-banner::before {
+            content: "РЕКЛАМА";
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            font-size: 8px;
+            color: rgba(255,255,255,0.3);
+        }
+        .ad-banner h3 {
+            font-family: 'Press Start 2P', monospace;
+            font-size: 14px;
+            color: white;
+            text-shadow: 2px 2px black;
+            animation: blink 0.5s step-end infinite;
+        }
+        .ad-banner p {
+            color: yellow;
+            font-weight: bold;
+            font-size: 18px;
+        }
+        .ad-close {
+            position: absolute;
+            top: 2px;
+            right: 8px;
+            font-size: 16px;
+            color: rgba(255,255,255,0.2);
+            cursor: pointer;
+        }
+
+        /* CALCULATOR DISPLAY */
+        .calc-display {
+            background: #1a1a2e;
+            border: 4px solid;
+            border-image: linear-gradient(90deg, red, orange, yellow, green, blue, violet) 1;
+            border-radius: 0;
+            padding: 20px;
+            margin: 15px 0;
+            text-align: right;
+            position: relative;
+            overflow: hidden;
+        }
+        .calc-display .display-label {
+            color: #666;
+            font-size: 12px;
+            text-align: left;
+            font-family: 'Press Start 2P', monospace;
+        }
+        .calc-display .display-value {
+            color: #0ff;
+            font-family: 'Press Start 2P', monospace;
+            font-size: 2em;
+            word-break: break-all;
+            min-height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            text-shadow: 0 0 10px #0ff, 0 0 20px #0ff;
+        }
+        .calc-display .watermark {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-30deg);
+            font-size: 40px;
+            color: rgba(255,255,255,0.05);
+            font-family: 'Press Start 2P', monospace;
+            white-space: nowrap;
+            pointer-events: none;
+        }
+
+        /* CALCULATOR BUTTONS */
+        .calc-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+            margin: 15px 0;
+        }
+        .calc-btn {
+            padding: 20px;
+            font-size: 20px;
+            font-weight: bold;
+            border: 3px outset #999;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.1s;
+            font-family: 'Comic Neue', cursive;
+            position: relative;
+            overflow: hidden;
+        }
+        .calc-btn:active {
+            border-style: inset;
+            transform: scale(0.95);
+        }
+        .calc-btn.num { background: linear-gradient(145deg, #e0e0e0, #b0b0b0); }
+        .calc-btn.op { background: linear-gradient(145deg, #ff9500, #cc7700); color: white; }
+        .calc-btn.eq { background: linear-gradient(145deg, #34c759, #248a3d); color: white; grid-column: span 2; }
+        .calc-btn.clear { background: linear-gradient(145deg, #ff3b30, #cc2f26); color: white; }
+        .calc-btn.special { background: linear-gradient(145deg, #af52de, #8944b3); color: white; }
+        .calc-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .calc-btn.running-away {
+            transition: all 0.2s ease;
+        }
+
+        /* CAPTCHA MODAL */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.8);
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: popIn 0.5s ease;
+        }
+        .modal {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            max-width: 550px;
+            width: 90%;
+            max-height: 85vh;
+            overflow-y: auto;
+            position: relative;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+        }
+        .modal h2 {
+            text-align: center;
+            font-family: 'Press Start 2P', monospace;
+            font-size: 16px;
+            margin-bottom: 20px;
+            animation: rainbow 2s linear infinite;
+        }
+
+        .captcha-section {
+            margin: 15px 0;
+            padding: 15px;
+            background: #f5f5f5;
+            border-radius: 10px;
+            border: 2px solid #ddd;
+        }
+        .captcha-section label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+        .captcha-section input,
+        .captcha-section select,
+        .captcha-section textarea {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #ccc;
+            border-radius: 8px;
+            font-size: 14px;
+            font-family: inherit;
+        }
+        .captcha-section .hint {
+            font-size: 11px;
+            color: #999;
+            margin-top: 4px;
+        }
+        .captcha-images {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 5px;
+        }
+        .captcha-images div {
+            aspect-ratio: 1;
+            background: #ddd;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            cursor: pointer;
+            border: 3px solid transparent;
+            transition: all 0.2s;
+        }
+        .captcha-images div:hover { border-color: blue; }
+        .captcha-images div.selected { border-color: #34c759; background: #e8f5e9; }
+
+        .captcha-submit {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #34c759, #248a3d);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 15px;
+            font-family: 'Press Start 2P', monospace;
+        }
+        .captcha-submit:hover { transform: scale(1.02); }
+
+        /* TERMS AND CONDITIONS */
+        .terms-box {
+            max-height: 150px;
+            overflow-y: scroll;
+            background: #f9f9f9;
+            border: 1px solid #ddd;
+            padding: 10px;
+            font-size: 8px;
+            color: #666;
+            line-height: 1.4;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+
+        /* CLIPPY */
+        .clippy {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 200px;
+            background: #ffffcc;
+            border: 2px solid #333;
+            border-radius: 15px;
+            padding: 15px;
+            box-shadow: 5px 5px 15px rgba(0,0,0,0.3);
+            z-index: 9000;
+            animation: float 4s ease-in-out infinite;
+        }
+        .clippy::after {
+            content: "";
+            position: absolute;
+            bottom: -15px;
+            right: 30px;
+            border-width: 15px 15px 0;
+            border-style: solid;
+            border-color: #333 transparent transparent;
+        }
+        .clippy-face {
+            font-size: 50px;
+            text-align: center;
+        }
+        .clippy-text {
+            font-size: 12px;
+            text-align: center;
+            margin-top: 8px;
+            font-weight: bold;
+        }
+        .clippy-close {
+            position: absolute;
+            top: 5px;
+            right: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            color: #999;
+        }
+
+        /* LOADING SCREEN */
+        .loading-screen {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: #000;
+            z-index: 99999;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+        .loading-screen h1 {
+            font-family: 'Press Start 2P', monospace;
+            font-size: 20px;
+            animation: rainbow 2s linear infinite;
+            margin-bottom: 30px;
+            text-align: center;
+            padding: 0 20px;
+        }
+        .loading-bar-container {
+            width: 300px;
+            height: 30px;
+            background: #333;
+            border-radius: 15px;
+            overflow: hidden;
+            border: 2px solid #666;
+        }
+        .loading-bar {
+            height: 100%;
+            background: linear-gradient(90deg, red, orange, yellow, green, blue, violet);
+            background-size: 200% 100%;
+            animation: bgChaos 1s linear infinite;
+            width: 0%;
+            transition: width 0.3s;
+            border-radius: 15px;
+        }
+        .loading-text {
+            margin-top: 15px;
+            font-family: 'Press Start 2P', monospace;
+            font-size: 10px;
+            color: #0ff;
+        }
+        .loading-tip {
+            margin-top: 30px;
+            font-size: 14px;
+            color: #888;
+            text-align: center;
+            max-width: 400px;
+            padding: 0 20px;
+        }
+
+        /* POPUP ADS */
+        .popup-ad {
+            position: fixed;
+            background: white;
+            border: 3px solid red;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            z-index: 9999;
+            text-align: center;
+            animation: popIn 0.3s ease;
+            max-width: 350px;
+        }
+        .popup-ad h3 {
+            font-family: 'Press Start 2P', monospace;
+            font-size: 12px;
+            color: red;
+            animation: blink 0.5s step-end infinite;
+            margin-bottom: 10px;
+        }
+        .popup-ad .popup-close {
+            position: absolute;
+            top: 5px;
+            right: 10px;
+            font-size: 20px;
+            cursor: pointer;
+            color: #ccc;
+        }
+        .popup-ad .popup-close:hover { color: red; }
+        .popup-ad .fake-btn {
+            display: inline-block;
+            padding: 8px 20px;
+            background: red;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+            font-weight: bold;
+        }
+
+        /* PREMIUM POPUP */
+        .premium-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.9);
+            z-index: 10001;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .premium-modal {
+            background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+            border: 3px solid gold;
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            color: white;
+            max-width: 450px;
+            animation: popIn 0.5s ease;
+        }
+        .premium-modal h2 {
+            font-family: 'Press Start 2P', monospace;
+            color: gold;
+            font-size: 18px;
+            margin-bottom: 20px;
+            animation: neonPulse 2s infinite;
+        }
+        .premium-modal .price {
+            font-size: 48px;
+            font-weight: bold;
+            color: gold;
+            margin: 20px 0;
+        }
+        .premium-modal .price span { font-size: 16px; color: #aaa; text-decoration: line-through; }
+        .premium-features {
+            text-align: left;
+            margin: 20px 0;
+        }
+        .premium-features li {
+            padding: 5px 0;
+            list-style: none;
+        }
+        .premium-features li::before { content: "✅ "; }
+        .premium-buy {
+            background: linear-gradient(135deg, gold, #ff8c00);
+            color: black;
+            border: none;
+            padding: 15px 40px;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 30px;
+            cursor: pointer;
+            animation: shake 1s infinite;
+            font-family: 'Press Start 2P', monospace;
+        }
+        .premium-skip {
+            display: block;
+            margin-top: 15px;
+            color: #555;
+            font-size: 8px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .premium-skip:hover { color: #333; }
+
+        /* FACTS TICKER */
+        .facts-ticker {
+            background: #1a1a2e;
+            color: #0ff;
+            padding: 8px;
+            font-family: 'Press Start 2P', monospace;
+            font-size: 10px;
+            overflow: hidden;
+            white-space: nowrap;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #0ff;
+        }
+        .facts-ticker span {
+            display: inline-block;
+            animation: marquee 20s linear infinite;
+        }
+
+        /* PROGRESS BARS, RATINGS, ETC */
+        .trust-badges {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 15px 0;
+        }
+        .trust-badge {
+            background: rgba(255,255,255,0.2);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+            color: white;
+            font-weight: bold;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+
+        /* VIRUS WARNING */
+        .virus-warning {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #c0c0c0;
+            border: 3px outset #ddd;
+            padding: 0;
+            z-index: 10002;
+            width: 400px;
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            box-shadow: 5px 5px 15px rgba(0,0,0,0.5);
+            animation: popIn 0.3s ease;
+        }
+        .virus-warning .vw-header {
+            background: linear-gradient(90deg, #000080, #1084d0);
+            color: white;
+            padding: 4px 8px;
+            font-size: 13px;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .virus-warning .vw-body {
+            padding: 20px;
+            display: flex;
+            gap: 15px;
+            align-items: flex-start;
+        }
+        .virus-warning .vw-icon { font-size: 48px; }
+        .virus-warning .vw-text { font-size: 13px; line-height: 1.5; }
+        .virus-warning .vw-buttons {
+            padding: 10px 20px;
+            text-align: center;
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+        .virus-warning .vw-btn {
+            padding: 5px 25px;
+            border: 2px outset #ddd;
+            background: #c0c0c0;
+            font-size: 13px;
+            cursor: pointer;
+            min-width: 80px;
+        }
+        .virus-warning .vw-btn:active { border-style: inset; }
+
+        /* HISTORY SIDEBAR */
+        .history-section {
+            background: rgba(0,0,0,0.3);
+            border-radius: 15px;
+            padding: 15px;
+            margin: 15px 0;
+            backdrop-filter: blur(10px);
+        }
+        .history-section h3 {
+            color: white;
+            font-family: 'Press Start 2P', monospace;
+            font-size: 12px;
+            margin-bottom: 10px;
+        }
+        .history-item {
+            background: rgba(255,255,255,0.1);
+            padding: 8px 12px;
+            border-radius: 8px;
+            color: #0ff;
+            font-family: monospace;
+            font-size: 14px;
+            margin: 5px 0;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        /* FOOTER */  
+        .footer {
+            text-align: center;
+            padding: 30px;
+            color: rgba(255,255,255,0.5);
+            font-size: 10px;
+        }
+        .footer a { color: rgba(255,255,255,0.5); }
+
+        /* FALLING EMOJIS */
+        .falling-emoji {
+            position: fixed;
+            top: -50px;
+            font-size: 30px;
+            animation: fall linear forwards;
+            pointer-events: none;
+            z-index: 8000;
+        }
+        @keyframes fall {
+            to { top: 110vh; transform: rotate(720deg); }
+        }
+
+        /* UP/DOWN VOTE */
+        .rating-section {
+            text-align: center;
+            margin: 15px 0;
+            padding: 15px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 15px;
+        }
+        .rating-section .stars { font-size: 30px; cursor: pointer; }
+        .rating-section p { color: white; font-size: 12px; margin-top: 5px; }
+
+        /* DARK MODE TOGGLE (does nothing useful) */
+        .mode-toggle {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background: rgba(0,0,0,0.5);
+            color: white;
+            border: 2px solid white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 14px;
+            z-index: 8999;
+        }
+        .mode-toggle:hover { background: rgba(0,0,0,0.8); }
+
+        /* BRIGHTNESS MODE (extra chaos) */
+        body.extra-bright {
+            filter: saturate(3) contrast(1.5);
+        }
+        body.inverted {
+            filter: invert(1) hue-rotate(180deg);
+        }
+        body.party-mode .calc-btn {
+            animation: spin 1s linear infinite;
+        }
+
+        /* NOTIFICATION */
+        .notification {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #333;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 10px;
+            font-weight: bold;
+            z-index: 10003;
+            animation: popIn 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .social-proof {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background: white;
+            padding: 12px 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            font-size: 13px;
+            z-index: 8999;
+            animation: popIn 0.5s ease;
+            max-width: 280px;
+        }
+        .social-proof .sp-name { font-weight: bold; }
+        .social-proof .sp-time { color: #999; font-size: 11px; }
+
+        /* CONFETTI */
+        .confetti-piece {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            top: -10px;
+            z-index: 10004;
+            pointer-events: none;
+        }
+        @keyframes confetti-fall {
+            to { top: 110vh; transform: rotate(720deg) translateX(100px); }
+        }
+
+        /* scrollbar chaos */
+        ::-webkit-scrollbar { width: 15px; }
+        ::-webkit-scrollbar-track { background: linear-gradient(red,orange,yellow,green,blue,violet); }
+        ::-webkit-scrollbar-thumb { background: #333; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #555; }
+    </style>
+</head>
+<body>
+    <!-- LOADING SCREEN -->
+    <div class="loading-screen" id="loadingScreen">
+        <h1>⚡ КалічКулятор 3000 ⚡<br>ЗАВАНТАЖЕННЯ...</h1>
+        <div class="loading-bar-container">
+            <div class="loading-bar" id="loadingBar"></div>
+        </div>
+        <div class="loading-text" id="loadingText">Ініціалізація калічності...</div>
+        <div class="loading-tip" id="loadingTip">💡 Цікавий факт: КалічКулятор 3000 був заборонений у 47 країнах</div>
+    </div>
+
+    <!-- MAIN CONTENT (hidden initially) -->
+    <div id="mainContent" style="display:none;">
+        <!-- MARQUEE -->
+        <div class="marquee-banner">
+            <span>🔥🔥🔥 УВАГА!!! КалічКулятор 3000 — ОФІЦІЙНО ВИЗНАНИЙ НАЙКРАЩИМ КАЛЬКУЛЯТОРОМ 2026 РОКУ!!! 🏆 ПЕРЕМОГА НА КОНКУРСІ "ЗОЛОТИЙ БАҐ" 🏆 ПОНАД 3 МІЛЬЯРДИ ЗАВАНТАЖЕНЬ!!! 🔥🔥🔥 РЕКОМЕНДОВАНО NASA, FBI ТА БАБУСЕЮ ГАЛЕЮ!!! 🔥🔥🔥</span>
+        </div>
+
+        <!-- HEADER -->
+        <div class="header">
+            <h1>🧮 КалічКулятор 3000 🧮</h1>
+            <p class="subtitle">✨ Математика ніколи не була такою болючою ✨</p>
+            <div class="visitor-counter">
+                👁️ ВІДВІДУВАЧІВ ОНЛАЙН: <span id="visitorCount">1,847,293</span>
+            </div>
+            <div class="trust-badges">
+                <span class="trust-badge">🏆 #1 Калькулятор 2026</span>
+                <span class="trust-badge">⭐ 4.9/5 (з 3 оцінок)</span>
+                <span class="trust-badge">🔒 100% Безпечно*</span>
+                <span class="trust-badge">🚀 Працює на квантових процесорах</span>
+                <span class="trust-badge">🧠 ШІ-підсилений</span>
+            </div>
+        </div>
+
+        <!-- FAKE AD 1 -->
+        <div class="ad-banner" onclick="adClick()">
+            <span class="ad-close" onclick="event.stopPropagation(); this.parentElement.style.display='none'; showNotification('Ви закрили рекламу! Штраф: +3 капчі')">✕</span>
+            <h3>🚨 УВАГА! ВАШ КОМП'ЮТЕР МОЖЕ БУТИ ПОВІЛЬНИМ! 🚨</h3>
+            <p>Завантажте ТУРБО-ПРИСКОРЮВАЧ 9000 БЕЗКОШТОВНО!!!</p>
+            <small style="color: rgba(255,255,255,0.5)">*безкоштовно тільки перші 0.003 секунди</small>
+        </div>
+
+        <!-- APP CONTAINER -->
+        <div class="app-container">
+            <!-- FACTS TICKER -->
+            <div class="facts-ticker">
+                <span id="factsTicker">📊 BREAKING: КалічКулятор 3000 тепер рахує числа на 300% калічніше | 🧪 НАУКА: Вчені довели, що 2+2=5 (за підтримки КалічКулятор 3000) | 🏅 СПОРТ: КалічКулятор 3000 переміг у шахматному турнірі, хоча його ніхто не запрошував</span>
+            </div>
+
+            <!-- CALCULATOR -->
+            <div class="calc-display">
+                <div class="watermark">КалічКулятор 3000™</div>
+                <div class="display-label">⟩ РЕЗУЛЬТАТ ОБЧИСЛЕННЯ v3.0.0.0.0.1 (beta)</div>
+                <div class="display-value" id="display">0</div>
+            </div>
+
+            <div class="calc-grid" id="calcGrid">
+                <button class="calc-btn clear" onclick="handleBtnClick('C')">C</button>
+                <button class="calc-btn special" onclick="handleBtnClick('±')">±</button>
+                <button class="calc-btn special" onclick="handleBtnClick('%')">%</button>
+                <button class="calc-btn op" onclick="handleBtnClick('÷')">÷</button>
+
+                <button class="calc-btn num" onclick="handleBtnClick('7')">7</button>
+                <button class="calc-btn num" onclick="handleBtnClick('8')">8</button>
+                <button class="calc-btn num" onclick="handleBtnClick('9')">9</button>
+                <button class="calc-btn op" onclick="handleBtnClick('×')">×</button>
+
+                <button class="calc-btn num" onclick="handleBtnClick('4')">4</button>
+                <button class="calc-btn num" onclick="handleBtnClick('5')">5</button>
+                <button class="calc-btn num" onclick="handleBtnClick('6')">6</button>
+                <button class="calc-btn op" onclick="handleBtnClick('-')">−</button>
+
+                <button class="calc-btn num" onclick="handleBtnClick('1')">1</button>
+                <button class="calc-btn num" onclick="handleBtnClick('2')">2</button>
+                <button class="calc-btn num" onclick="handleBtnClick('3')">3</button>
+                <button class="calc-btn op" onclick="handleBtnClick('+')">+</button>
+
+                <button class="calc-btn num" onclick="handleBtnClick('0')" style="grid-column: span 2;">0</button>
+                <button class="calc-btn num" onclick="handleBtnClick('.')">.</button>
+                <button class="calc-btn eq" onclick="handleBtnClick('=')">=</button>
+            </div>
+
+            <!-- FAKE AD 2 -->
+            <div class="ad-banner" onclick="adClick()" style="background: linear-gradient(135deg, #6b5ce7, #a855f7);">
+                <span class="ad-close" onclick="event.stopPropagation(); this.parentElement.innerHTML='<h3>РЕКЛАМУ ВИДАЛЕНО</h3><p>Жартую 😈</p>'; setTimeout(() => this.parentElement.style.opacity = 1, 1000)">✕</span>
+                <h3>💎 КалічКулятор 3000 PREMIUM 💎</h3>
+                <p>Розблокуйте число 8 всього за $99.99/хв!</p>
+                <small style="color: rgba(255,255,255,0.5)">Число 8 — це розкіш, яку ви заслуговуєте</small>
+            </div>
+
+            <!-- RATING -->
+            <div class="rating-section">
+                <p style="color: white; font-weight: bold;">Оцініть КалічКулятор 3000:</p>
+                <div class="stars" id="ratingStars">
+                    <span onclick="rateApp(1)">⭐</span>
+                    <span onclick="rateApp(2)">⭐</span>
+                    <span onclick="rateApp(3)">⭐</span>
+                    <span onclick="rateApp(4)">⭐</span>
+                    <span onclick="rateApp(5)">⭐</span>
+                </div>
+                <p id="ratingText">Натисніть зірку для оцінки</p>
+            </div>
+
+            <!-- HISTORY -->
+            <div class="history-section">
+                <h3>📜 Історія обчислень</h3>
+                <div id="historyList">
+                    <div class="history-item"><span>Ще нічого не зламано</span><span>🤷</span></div>
+                </div>
+            </div>
+
+            <!-- FAKE AD 3 -->
+            <div class="ad-banner" onclick="adClick()" style="background: linear-gradient(135deg, #00b894, #00cec9);">
+                <h3>🎰 ГРАЙМО В МАТЕМАТИЧНЕ КАЗИНО! 🎰</h3>
+                <p>Постав свою відповідь на кон!</p>
+                <small style="color: rgba(255,255,255,0.5)">Шанс виграти: -42%</small>
+            </div>
+        </div>
+
+        <!-- MARQUEE BOTTOM -->
+        <div class="marquee-banner" style="background: blue; border-top: 3px dashed yellow; border-bottom: none;">
+            <span>⚠️ DISCLAIMER: КалічКулятор 3000 не несе відповідальності за: неправильні відповіді, згоріле домашнє завдання, розрив простору-часу, спонтанне танцювання, алергію на математику, та будь-які інші побічні ефекти ⚠️ Використовуйте на свій страх і ризик ⚠️ Батарейки не включені ⚠️</span>
+        </div>
+
+        <!-- FOOTER -->
+        <div class="footer">
+            <p>© 2026 КалічКулятор 3000™ — Всі права зарезервовані (жартую, ми нічого не резервували)</p>
+            <p>v3.0.0.0.0.0.0.0.1-alpha-beta-gamma-delta-omega (збірка #404)</p>
+            <p>Зроблено з 💀 та -3% любові</p>
+            <p style="font-size: 6px; margin-top: 10px;">Якщо ви читаєте це — вам вже нічого не допоможе</p>
+        </div>
+    </div>
+
+    <!-- COOKIE CONSENT -->
+    <div class="cookie-hell" id="cookieConsent" style="display:none;">
+        <h2>🍪 УЛЬТРА-МЕГА COOKIE ЗГОДА 🍪</h2>
+        <p>Ми використовуємо 47,382 різних типів cookies. Оберіть, які ви хочете прийняти:</p>
+        <div class="cookie-options">
+            <label class="cookie-option"><input type="checkbox" checked disabled> Базові cookies (потрібні для страждання)</label>
+            <label class="cookie-option"><input type="checkbox" checked> Cookies для відслідковування вашого настрою</label>
+            <label class="cookie-option"><input type="checkbox" checked> Cookies що знають де ви живете</label>
+            <label class="cookie-option"><input type="checkbox" checked> Cookies для телепатичної реклами</label>
+            <label class="cookie-option"><input type="checkbox" checked> Cookies для вашого холодильника (IoT)</label>
+            <label class="cookie-option"><input type="checkbox" checked> Cookies що фотографують ваш потилицю</label>
+            <label class="cookie-option"><input type="checkbox" checked> Cookies для подорожей у часі</label>
+            <label class="cookie-option"><input type="checkbox" checked> Cookies що розмовляють з вашим котом</label>
+            <label class="cookie-option"><input type="checkbox" checked> Cookies для паралельних всесвітів</label>
+            <label class="cookie-option"><input type="checkbox" checked> Cookies що крадуть Wi-Fi у сусідів</label>
+            <label class="cookie-option"><input type="checkbox" checked> Cookies для читання думок</label>
+            <label class="cookie-option"><input type="checkbox" checked> Печеньки (справжні, з шоколадом)</label>
+        </div>
+        <div style="text-align: center; margin-top: 15px;">
+            <button class="cookie-btn cookie-reject" onclick="rejectCookies()">❌ ВІДХИЛИТИ ВСЕ</button>
+            <button class="cookie-btn cookie-accept" onclick="acceptCookies()">прийняти (натисніть 47 разів)</button>
+        </div>
+        <p style="font-size: 8px; color: #555; margin-top: 10px; text-align: center;">* Кнопка "Відхилити" є декоративним елементом і не виконує жодних функцій</p>
+    </div>
+
+    <!-- CLIPPY -->
+    <div class="clippy" id="clippy" style="display:none;">
+        <span class="clippy-close" onclick="dismissClippy()">✕</span>
+        <div class="clippy-face">📎</div>
+        <div class="clippy-text" id="clippyText">Схоже, ви намагаєтесь порахувати! Потрібна допомога?</div>
+    </div>
+
+    <button class="mode-toggle" id="modeToggle" onclick="toggleMode()">🌙 Темний режим</button>
+
+    <script>
+        // ============================================
+        // STATE
+        // ============================================
+        let displayValue = '0';
+        let firstOperand = null;
+        let operator = null;
+        let waitingForSecond = false;
+        let clickCount = 0;
+        let captchaRequired = true;
+        let cookieClicks = 0;
+        let cookieAccepted = false;
+        let premiumShown = false;
+        let virusShown = false;
+        let historyItems = [];
+        let chaosLevel = 0;
+        let modeIndex = 0;
+        const modes = ['normal', 'extra-bright', 'inverted', 'party-mode'];
+
+        // ============================================
+        // LOADING SCREEN
+        // ============================================
+        const loadingMessages = [
+            "Ініціалізація калічності...",
+            "Завантаження математичних помилок...",
+            "Калібрування неточності...",
+            "Встановлення зв'язку з паралельним всесвітом...",
+            "Видалення правильних відповідей...",
+            "Імпорт хаосу з сервера...",
+            "Компіляція страждань...",
+            "Нагрівання пікселів...",
+            "Налаштування генератора болю...",
+            "Розгортання баґів (847 із 847)...",
+            "Перевірка чи 2+2=5...",
+            "Шукаємо кнопку '='...",
+            "Завантаження реклами... (пріоритет: МАКСИМАЛЬНИЙ)",
+            "Оптимізація неоптимальності...",
+            "Готово! Ні, зачекайте...",
+            "Ще трошки...",
+            "Ок тепер точно...",
+            "ФІНАЛЬНЕ завантаження...",
+        ];
+
+        const loadingTips = [
+            "💡 КалічКулятор 3000 був заборонений у 47 країнах",
+            "💡 За статистикою, 9 з 10 математиків плачуть при використанні",
+            "💡 КалічКулятор 3000 споживає більше RAM ніж Google Chrome",
+            "💡 Попередня версія випадково запустила ядерний реактор",
+            "💡 Наш CEO — кіт, який ходить по клавіатурі",
+            "💡 Кожен баґ — це фіча, яку ви ще не зрозуміли",
+            "💡 Рекомендуємо використовувати у захисних окулярах",
+            "💡 99.7% обчислень є приблизно неправильними",
+        ];
+
+        let loadProgress = 0;
+        let loadingInterval;
+
+        function startLoading() {
+            let msgIndex = 0;
+            let tipIndex = 0;
+            loadingInterval = setInterval(() => {
+                // Progress goes forward... and sometimes backward
+                if (loadProgress < 30) {
+                    loadProgress += Math.random() * 5;
+                } else if (loadProgress < 60) {
+                    loadProgress += Math.random() * 3;
+                    // Sometimes go backward
+                    if (Math.random() < 0.3) loadProgress -= Math.random() * 8;
+                } else if (loadProgress < 85) {
+                    loadProgress += Math.random() * 2;
+                } else if (loadProgress < 99) {
+                    loadProgress += Math.random() * 0.5;
+                } else {
+                    loadProgress = 100;
+                }
+
+                loadProgress = Math.max(0, Math.min(100, loadProgress));
+                document.getElementById('loadingBar').style.width = loadProgress + '%';
+
+                if (Math.random() < 0.3) {
+                    document.getElementById('loadingText').textContent = loadingMessages[msgIndex % loadingMessages.length];
+                    msgIndex++;
+                }
+                if (Math.random() < 0.15) {
+                    document.getElementById('loadingTip').textContent = loadingTips[tipIndex % loadingTips.length];
+                    tipIndex++;
+                }
+
+                if (loadProgress >= 100) {
+                    clearInterval(loadingInterval);
+                    setTimeout(finishLoading, 500);
+                }
+            }, 200);
+        }
+
+        function finishLoading() {
+            document.getElementById('loadingScreen').style.opacity = '0';
+            document.getElementById('loadingScreen').style.transition = 'opacity 0.5s';
+            setTimeout(() => {
+                document.getElementById('loadingScreen').style.display = 'none';
+                document.getElementById('mainContent').style.display = 'block';
+                document.getElementById('cookieConsent').style.display = 'block';
+                startFallingEmojis();
+                startVisitorCounter();
+                startSocialProof();
+                setTimeout(() => showClippy("Привіт! Я ваш помічник — Скріпка! 📎 Схоже, ви намагаєтесь рахувати. ЗУПИНІТЬСЯ."), 3000);
+            }, 500);
+        }
+
+        // ============================================
+        // COOKIES
+        // ============================================
+        function acceptCookies() {
+            cookieClicks++;
+            if (cookieClicks < 47) {
+                showNotification(`Натиснуто ${cookieClicks}/47 разів. Залишилось ${47 - cookieClicks}!`);
+                // Make the button smaller each time
+                const btn = document.querySelector('.cookie-accept');
+                btn.style.fontSize = Math.max(4, 8 - cookieClicks * 0.1) + 'px';
+                btn.textContent = `прийняти (натисніть ще ${47 - cookieClicks} разів)`;
+            } else {
+                document.getElementById('cookieConsent').style.display = 'none';
+                cookieAccepted = true;
+                showNotification('🍪 Cookies прийнято! Ваш холодильник тепер підключено.');
+            }
+        }
+
+        function rejectCookies() {
+            // The reject button doesn't work, it just shows a message
+            const messages = [
+                "Гарна спроба! Але ні 😈",
+                "Цю кнопку ще не запрограмували",
+                "ERROR 418: I'm a teapot",
+                "Кнопка 'Відхилити' доступна в Premium версії",
+                "Ваш запит передано у відділ ігнорування",
+                "Відмова від cookies заборонена конституцією КалічКулятор 3000",
+                "*звуки ігнорування*",
+                "Ви серйозно? 🤨",
+            ];
+            showNotification(messages[Math.floor(Math.random() * messages.length)]);
+            
+            // Move the button somewhere random
+            const btn = document.querySelector('.cookie-reject');
+            btn.style.position = 'relative';
+            btn.style.left = (Math.random() * 100 - 50) + 'px';
+            btn.style.top = (Math.random() * 50 - 25) + 'px';
+        }
+
+        // ============================================
+        // CALCULATOR LOGIC (sort of)
+        // ============================================
+        function updateDisplay() {
+            const d = document.getElementById('display');
+            // Sometimes display the number upside down or in weird ways
+            if (chaosLevel > 5 && Math.random() < 0.2) {
+                d.style.transform = 'rotate(180deg)';
+            } else {
+                d.style.transform = 'none';
+            }
+            d.textContent = displayValue;
+        }
+
+        function handleBtnClick(value) {
+            clickCount++;
+            chaosLevel = Math.floor(clickCount / 3);
+
+            // Random events based on chaos level
+            if (clickCount === 5 && !premiumShown) {
+                showPremiumPopup();
+                premiumShown = true;
+                return;
+            }
+            if (clickCount === 15 && !virusShown) {
+                showVirusWarning();
+                virusShown = true;
+                return;
+            }
+
+            // Every few clicks, require CAPTCHA
+            if (clickCount % 7 === 0) {
+                showCaptcha(value);
+                return;
+            }
+
+            // Random popup ad
+            if (Math.random() < 0.15 && clickCount > 3) {
+                showPopupAd();
+            }
+
+            // Buttons run away sometimes
+            if (chaosLevel > 3 && Math.random() < 0.3) {
+                runAwayButtons();
+            }
+
+            // Show random clippy messages
+            if (Math.random() < 0.1) {
+                const clippyMsgs = [
+                    "Ви впевнені, що це правильна цифра? 🤔",
+                    "Мій кіт рахує краще за вас",
+                    "Може краще скористатись рахівницею?",
+                    "Я бачу, математика — не ваше 😬",
+                    "ПОРАДА: спробуйте вимкнути і ввімкнути калькулятор",
+                    "Цікавий вибір... дуже цікавий... 🧐",
+                    "А ви знали, що я — скріпка? Дивовижно!",
+                    "Зупиніться. Подумайте. Зупиніться знову.",
+                ];
+                showClippy(clippyMsgs[Math.floor(Math.random() * clippyMsgs.length)]);
+            }
+
+            processInput(value);
+        }
+
+        function processInput(value) {
+            if (value === 'C') {
+                displayValue = '0';
+                firstOperand = null;
+                operator = null;
+                waitingForSecond = false;
+                updateDisplay();
+                showNotification('🧹 Очищено! (або ні, хто знає)');
+                return;
+            }
+
+            if (value === '±') {
+                displayValue = String(-parseFloat(displayValue));
+                updateDisplay();
+                return;
+            }
+
+            if (value === '%') {
+                displayValue = String(parseFloat(displayValue) / 100);
+                updateDisplay();
+                return;
+            }
+
+            if (['+', '-', '×', '÷'].includes(value)) {
+                firstOperand = parseFloat(displayValue);
+                operator = value;
+                waitingForSecond = true;
+                return;
+            }
+
+            if (value === '=') {
+                if (operator && firstOperand !== null) {
+                    const second = parseFloat(displayValue);
+                    let result = calculate(firstOperand, operator, second);
+                    
+                    // CHAOS: sometimes give wrong answers
+                    const originalResult = result;
+                    if (Math.random() < 0.35) {
+                        const chaos = [
+                            () => result + Math.floor(Math.random() * 10) - 5,
+                            () => result * -1,
+                            () => Math.PI,
+                            () => 42,
+                            () => 69,
+                            () => 404,
+                            () => result + 0.0001,
+                            () => "🤡",
+                            () => "NaN... жартую: " + (result + 1),
+                            () => "∞",
+                            () => result.toString().split('').reverse().join(''),
+                            () => "≈" + (result + Math.random()).toFixed(2),
+                        ];
+                        result = chaos[Math.floor(Math.random() * chaos.length)]();
+                    }
+
+                    const expression = `${firstOperand} ${operator} ${second}`;
+                    displayValue = String(result);
+                    addHistory(expression, displayValue);
+                    
+                    firstOperand = null;
+                    operator = null;
+                    waitingForSecond = false;
+                    updateDisplay();
+
+                    // Confetti on calculation
+                    launchConfetti();
+                    
+                    // Drop some emojis
+                    for (let i = 0; i < 5; i++) {
+                        setTimeout(() => dropEmoji(), i * 200);
+                    }
+
+                    return;
+                }
+            }
+
+            // Number/dot input
+            if (waitingForSecond) {
+                displayValue = value;
+                waitingForSecond = false;
+            } else {
+                displayValue = displayValue === '0' ? value : displayValue + value;
+            }
+            updateDisplay();
+        }
+
+        function calculate(a, op, b) {
+            switch(op) {
+                case '+': return a + b;
+                case '-': return a - b;
+                case '×': return a * b;
+                case '÷': return b === 0 ? '💀 ДІЛЕННЯ НА НУЛЬ 💀' : a / b;
+            }
+        }
+
+        function addHistory(expression, result) {
+            historyItems.unshift({ expression, result });
+            if (historyItems.length > 5) historyItems.pop();
+            
+            const list = document.getElementById('historyList');
+            list.innerHTML = historyItems.map(item => 
+                `<div class="history-item"><span>${item.expression}</span><span>= ${item.result}</span></div>`
+            ).join('');
+        }
+
+        // ============================================
+        // CAPTCHA FROM HELL
+        // ============================================
+        function showCaptcha(pendingValue) {
+            const captchaTypes = [
+                createMathCaptcha,
+                createImageCaptcha,
+                createPhilosophyCaptcha,
+                createAbsurdCaptcha,
+                createEpicCaptcha,
+                createMultiStepCaptcha,
+            ];
+            
+            const captcha = captchaTypes[Math.floor(Math.random() * captchaTypes.length)]();
+            
+            const overlay = document.createElement('div');
+            overlay.className = 'modal-overlay';
+            overlay.innerHTML = `
+                <div class="modal">
+                    <h2>🔒 ВЕРИФІКАЦІЯ ЛЮДЯНОСТІ 🔒</h2>
+                    <p style="text-align:center; color: #666; margin-bottom: 15px;">
+                        Щоб натиснути кнопку "${pendingValue}", доведіть що ви не робот!
+                    </p>
+                    ${captcha.html}
+                    <div class="terms-box">
+                        <p><b>УМОВИ ВИКОРИСТАННЯ КалічКулятор 3000:</b></p>
+                        <p>1. Користувач погоджується, що всі відповіді є "приблизно правильними" з похибкою ±∞.</p>
+                        <p>2. Компанія не несе відповідальності за: а) неправильні результати; б) правильні результати (вони випадкові); в) емоційні травми; г) спонтанне горіння пристрою.</p>
+                        <p>3. Натискаючи будь-яку кнопку, ви автоматично підписуєтесь на щоденну розсилку "Цікаві факти про число 7".</p>
+                        <p>4. Ваша душа тепер належить КалічКулятор 3000™ (пункт 4, підпункт Ж, параграф 🤡).</p>
+                        <p>5. У випадку апокаліпсису, КалічКулятор 3000 стане єдиним засобом комунікації.</p>
+                        <p>6. Заборонено використовувати для реальних математичних обчислень.</p>
+                        <p>7. Число 7 — найкраще число. Це не обговорюється.</p>
+                        <p>8. При виявленні правильної відповіді, будь ласка, повідомте нашу службу підтримки — це баґ.</p>
+                        <p>9. КалічКулятор 3000 може спонтанно змінювати математичні закони без попередження.</p>
+                        <p>10. Якщо ви дочитали до цього пункту — ви офіційно калічний математик. Вітаємо! 🎉</p>
+                    </div>
+                    <label style="display:flex; align-items:center; gap:8px; margin:10px 0; font-size: 12px;">
+                        <input type="checkbox" id="termsCheck"> Я прочитав(-ла) всі 847 сторінок умов та погоджуюсь продати свою душу
+                    </label>
+                    <button class="captcha-submit" onclick="submitCaptcha(this, '${pendingValue}')">
+                        ✅ ПІДТВЕРДИТИ ЩО Я ЛЮДИНА
+                    </button>
+                </div>
+            `;
+            document.body.appendChild(overlay);
+        }
+
+        function createMathCaptcha() {
+            const a = Math.floor(Math.random() * 1000);
+            const b = Math.floor(Math.random() * 1000);
+            const ops = ['+', '-', '×'];
+            const op = ops[Math.floor(Math.random() * ops.length)];
+            return {
+                html: `
+                    <div class="captcha-section">
+                        <label>📐 Розв'яжіть рівняння (без калькулятора!!! ...зачекайте):</label>
+                        <p style="font-size: 24px; text-align: center; font-family: 'Press Start 2P', monospace; margin: 15px 0;">
+                            ${a} ${op} ${b} = ?
+                        </p>
+                        <input type="number" id="captchaAnswer" placeholder="Ваша відповідь (спробуйте вгадати)">
+                        <p class="hint">Підказка: відповідь — це число (або ні)</p>
+                    </div>
+                `,
+                validate: () => true // Always passes lol
+            };
+        }
+
+        function createImageCaptcha() {
+            const emojis = ['🚗', '🚕', '🚙', '🚌', '🚎', '🏎️', '🚓', '🚑', '🐱', '🚒', '🐶', '🦊'];
+            const shuffled = emojis.sort(() => Math.random() - 0.5);
+            return {
+                html: `
+                    <div class="captcha-section">
+                        <label>🖼️ Оберіть ВСІ зображення з ТРАНСПОРТОМ (або котами, ми самі не знаємо):</label>
+                        <div class="captcha-images">
+                            ${shuffled.slice(0, 9).map((e, i) => 
+                                `<div onclick="this.classList.toggle('selected')" data-idx="${i}">${e}</div>`
+                            ).join('')}
+                        </div>
+                        <p class="hint">Підказка: кіт може бути транспортом, якщо вірити достатньо сильно</p>
+                    </div>
+                `,
+                validate: () => true
+            };
+        }
+
+        function createPhilosophyCaptcha() {
+            return {
+                html: `
+                    <div class="captcha-section">
+                        <label>🧠 Філософське питання для підтвердження свідомості:</label>
+                        <p style="font-style: italic; margin: 10px 0; color: #666;">"Якщо калькулятор рахує в лісі, а ніхто не бачить результат — чи правильна відповідь?"</p>
+                        <textarea id="captchaPhilosophy" rows="3" placeholder="Напишіть есе мінімум на 500 слів..."></textarea>
+                        <p class="hint">Мінімум 500 слів. Прийматимуться лише відповіді, що цитують Канта або Шевченка.</p>
+                    </div>
+                    <div class="captcha-section">
+                        <label>🎨 Намалюйте число 7 у стилі Пікассо:</label>
+                        <canvas id="captchaCanvas" width="300" height="150" style="border: 2px solid #ccc; border-radius: 8px; background: white; cursor: crosshair; display: block; margin: 0 auto;"></canvas>
+                        <p class="hint">Оцінюватиме комісія з 12 мистецтвознавців</p>
+                    </div>
+                `,
+                validate: () => true
+            };
+        }
+
+        function createAbsurdCaptcha() {
+            return {
+                html: `
+                    <div class="captcha-section">
+                        <label>🔢 Введіть число Пі до 15-го знаку після коми:</label>
+                        <input type="text" id="captchaPi" placeholder="3.14159265358979...">
+                        <p class="hint">Підказка: це десь між 3 та 4. Напевно.</p>
+                    </div>
+                    <div class="captcha-section">
+                        <label>🎵 Яка пісня зараз грає у вас в голові?</label>
+                        <input type="text" placeholder="Never Gonna Give You Up...">
+                        <p class="hint">Неправильна відповідь: будь-яка, крім "Їхали козаки"</p>
+                    </div>
+                    <div class="captcha-section">
+                        <label>🤫 Назвіть пароль:</label>
+                        <input type="password" placeholder="*******">
+                        <p class="hint">Підказка: пароль — "пароль" (але це секрет!)</p>
+                    </div>
+                    <div class="captcha-section">
+                        <label>🦆 Скільки качок ви бачите прямо зараз?</label>
+                        <select>
+                            <option>0 (це те, що качки ХОЧУТЬ щоб ви думали)</option>
+                            <option>1-5 (підозріло мало)</option>
+                            <option>6-100 (нормальна кількість)</option>
+                            <option>100+ (ви — обраний)</option>
+                            <option>Я сам(а) качка 🦆</option>
+                        </select>
+                    </div>
+                `,
+                validate: () => true
+            };
+        }
+
+        function createEpicCaptcha() {
+            return {
+                html: `
+                    <div class="captcha-section">
+                        <label>⚡ БЛИСКАВИЧНА ВІКТОРИНА (у вас є 3 секунди):</label>
+                        <p style="font-size: 16px; margin: 10px 0;">Що важче: 1 кг заліза чи 1 кг пір'я?</p>
+                        <div style="display: flex; gap: 10px;">
+                            <button onclick="showNotification('НЕПРАВИЛЬНО! 😂')" style="flex:1; padding: 10px; border: 2px solid #ccc; border-radius: 8px; cursor: pointer; background: #f5f5f5;">🔩 Залізо</button>
+                            <button onclick="showNotification('НЕПРАВИЛЬНО! 😂')" style="flex:1; padding: 10px; border: 2px solid #ccc; border-radius: 8px; cursor: pointer; background: #f5f5f5;">🪶 Пір'я</button>
+                            <button onclick="showNotification('НЕПРАВИЛЬНО! 😂')" style="flex:1; padding: 10px; border: 2px solid #ccc; border-radius: 8px; cursor: pointer; background: #f5f5f5;">🤔 Однаково</button>
+                        </div>
+                        <p class="hint">Всі відповіді неправильні. Правильна відповідь: "не знаю"</p>
+                    </div>
+                    <div class="captcha-section">
+                        <label>📝 Перепишіть цей текст ЗАДОМ НАПЕРЕД:</label>
+                        <p style="font-family: monospace; background: #eee; padding: 10px; border-radius: 5px; letter-spacing: 2px; word-break: break-all;">
+                            КалічКулятор3000НайкращийКалькуляторУсіхЧасівІНародів
+                        </p>
+                        <input type="text" placeholder="Удачі...">
+                    </div>
+                    <div class="captcha-section">
+                        <label>🎯 Натисніть на кнопку що рухається:</label>
+                        <div style="position: relative; height: 80px; background: #eee; border-radius: 8px; overflow: hidden;">
+                            <button id="movingBtn" onclick="showNotification('Ого, спіймали! 🎉')" style="position: absolute; padding: 8px 15px; background: red; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; transition: all 0.2s;"
+                            onmouseover="this.style.left=Math.random()*250+'px'; this.style.top=Math.random()*50+'px';">
+                                НАТИСНИ МЕНЕ
+                            </button>
+                        </div>
+                    </div>
+                `,
+                validate: () => true
+            };
+        }
+
+        function createMultiStepCaptcha() {
+            return {
+                html: `
+                    <div class="captcha-section">
+                        <label>📋 КРОК 1 з 847: Введіть ваше повне ім'я:</label>
+                        <input type="text" placeholder="Тарас Григорович...">
+                    </div>
+                    <div class="captcha-section">
+                        <label>📋 КРОК 2 з 847: Ваш улюблений динозавр:</label>
+                        <select>
+                            <option>Тиранозавр Рекс</option>
+                            <option>Велоцираптор</option>
+                            <option>Трицератопс</option>
+                            <option>Птеродактиль (так, я знаю, що це не динозавр)</option>
+                            <option>Я сам(а) динозавр</option>
+                        </select>
+                    </div>
+                    <div class="captcha-section">
+                        <label>📋 КРОК 3 з 847: Оцініть цю капчу від 1 до 10:</label>
+                        <input type="range" min="1" max="10" value="5" oninput="this.nextElementSibling.textContent=this.value" style="width: 100%;">
+                        <span style="display: block; text-align: center; font-size: 20px;">5</span>
+                        <p class="hint">Оцінки нижче 8 не приймаються</p>
+                    </div>
+                    <div class="captcha-section">
+                        <label>📋 КРОК 4 з 847: Погодьтесь з наступним твердженням:</label>
+                        <p style="margin: 8px 0;">🔲 КалічКулятор 3000 — це найкраще, що сталося з математикою з часів винайдення нуля</p>
+                        <div style="display: flex; gap: 10px; margin-top: 10px;">
+                            <button onclick="this.textContent='✅ Погоджуюсь!'; this.style.background='#34c759'; this.style.color='white';" style="flex:1; padding: 10px; border: 2px solid #ccc; border-radius: 8px; cursor: pointer;">Погоджуюсь</button>
+                            <button onclick="showNotification('Ця опція недоступна у вашому регіоні 🌍')" style="flex:1; padding: 10px; border: 2px solid #ccc; border-radius: 8px; cursor: pointer; color: #ccc;">Не погоджуюсь</button>
+                        </div>
+                    </div>
+                    <p style="text-align: center; color: #999; font-size: 11px; margin-top: 10px;">
+                        Кроки 5-847 пропущено для вашої зручності (ви все одно не дочитали б)
+                    </p>
+                `,
+                validate: () => true
+            };
+        }
+
+        function submitCaptcha(btn, pendingValue) {
+            const termsCheck = document.getElementById('termsCheck');
+            if (!termsCheck.checked) {
+                showNotification('❌ Прочитайте умови! Всі 847 сторінок!');
+                // Shake the modal
+                btn.closest('.modal').style.animation = 'shake 0.5s';
+                setTimeout(() => btn.closest('.modal').style.animation = '', 500);
+                return;
+            }
+
+            // 30% chance to fail anyway
+            if (Math.random() < 0.3) {
+                showNotification('❌ CAPTCHA не пройдена! Ви — робот! 🤖');
+                btn.closest('.modal-overlay').remove();
+                // Show another captcha immediately
+                setTimeout(() => showCaptcha(pendingValue), 500);
+                return;
+            }
+
+            btn.closest('.modal-overlay').remove();
+            showNotification('✅ Верифікацію пройдено! (напевно)');
+            processInput(pendingValue);
+        }
+
+        // ============================================
+        // PREMIUM POPUP
+        // ============================================
+        function showPremiumPopup() {
+            const overlay = document.createElement('div');
+            overlay.className = 'premium-overlay';
+            overlay.innerHTML = `
+                <div class="premium-modal">
+                    <h2>💎 КалічКулятор 3000 PREMIUM 💎</h2>
+                    <p>Розблокуйте ПОВНИЙ потенціал калічності!</p>
+                    <div class="price">
+                        $999.99<small>/хв</small>
+                        <br><span>$9999.99/хв</span>
+                    </div>
+                    <ul class="premium-features">
+                        <li>Розблокувати число 8 (ексклюзив!)</li>
+                        <li>Правильні відповіді (іноді)</li>
+                        <li>Без реклами (жартую, реклами буде БІЛЬШЕ)</li>
+                        <li>Золота рамка навколо кнопок</li>
+                        <li>Персональний помічник-скріпка</li>
+                        <li>NFT кожного результату</li>
+                        <li>Доступ до числа 🅱️</li>
+                        <li>Видалення 3 з 847 кроків капчі</li>
+                    </ul>
+                    <button class="premium-buy" onclick="buyPremium(this)">💳 КУПИТИ ЗАРАЗ!!!</button>
+                    <a class="premium-skip" onclick="this.closest('.premium-overlay').remove(); showNotification('Ви пропустили НАЙКРАЩУ ПРОПОЗИЦІЮ ТИСЯЧОЛІТТЯ 😤')">
+                        ні дякую, я хочу страждати безкоштовно (натисніть 3 рази)
+                    </a>
+                </div>
+            `;
+            document.body.appendChild(overlay);
+
+            let skipClicks = 0;
+            overlay.querySelector('.premium-skip').addEventListener('click', function(e) {
+                skipClicks++;
+                if (skipClicks >= 3) {
+                    overlay.remove();
+                }
+            });
+        }
+
+        function buyPremium(btn) {
+            btn.textContent = 'ОБРОБКА...';
+            btn.style.animation = 'none';
+            setTimeout(() => {
+                btn.textContent = '❌ КАРТКУ ВІДХИЛЕНО';
+                btn.style.background = 'red';
+                setTimeout(() => {
+                    btn.textContent = '(ваш банк сміявся)';
+                    setTimeout(() => {
+                        btn.closest('.premium-overlay').remove();
+                        showNotification('💳 Транзакцію скасовано. Ваш банк каже "LOL"');
+                    }, 1500);
+                }, 1500);
+            }, 2000);
+        }
+
+        // ============================================
+        // VIRUS WARNING
+        // ============================================
+        function showVirusWarning() {
+            const div = document.createElement('div');
+            div.className = 'virus-warning';
+            div.innerHTML = `
+                <div class="vw-header">
+                    <span>⚠️ Windows Security Alert</span>
+                    <span style="cursor:pointer" onclick="this.closest('.virus-warning').remove(); showNotification('Вірус вдало проігноровано! 🦠')">✕</span>
+                </div>
+                <div class="vw-body">
+                    <div class="vw-icon">⚠️</div>
+                    <div class="vw-text">
+                        <b>УВАГА!</b> КалічКулятор 3000 виявив <b>47,382 віруси</b> на вашому пристрої!<br><br>
+                        Серед них:<br>
+                        • Trojan.MathError.exe<br>
+                        • Worm.WrongAnswer.dll<br>
+                        • Virus.КалічВірус3000.bat<br>
+                        • Malware.НеправильнийРезультат.py<br><br>
+                        <b>Натисніть OK щоб видалити всі віруси (і математику заодно)</b>
+                    </div>
+                </div>
+                <div class="vw-buttons">
+                    <button class="vw-btn" onclick="this.closest('.virus-warning').remove(); showNotification('✅ Всі 47,382 віруси видалено! (математику теж видалено)')">OK</button>
+                    <button class="vw-btn" onclick="this.closest('.virus-warning').remove(); showVirusWarning(); showVirusWarning();">Скасувати</button>
+                </div>
+            `;
+            
+            // Random position
+            div.style.left = Math.random() * (window.innerWidth - 400) + 'px';
+            div.style.top = Math.random() * (window.innerHeight - 300) + 'px';
+            div.style.transform = 'none';
+            
+            document.body.appendChild(div);
+
+            // Make it draggable-ish (but it runs away)
+            div.onmousedown = function(e) {
+                if (e.target.tagName === 'BUTTON' || e.target.tagName === 'SPAN') return;
+                div.style.left = Math.random() * (window.innerWidth - 400) + 'px';
+                div.style.top = Math.random() * (window.innerHeight - 300) + 'px';
+            };
+        }
+
+        // ============================================
+        // POPUP ADS
+        // ============================================
+        function showPopupAd() {
+            const ads = [
+                {
+                    title: "🎉 ВИ ВИГРАЛИ iPhone 47!!!",
+                    text: "Ви наш 1,000,000-й відвідувач! Натисніть щоб отримати приз!",
+                    btn: "ЗАБРАТИ ПРИЗ"
+                },
+                {
+                    title: "🔥 ГАРЯЧІ ЧИСЛА У ВАШОМУ РАЙОНІ",
+                    text: "Числа 4, 7 та 12 хочуть з вами познайомитись!",
+                    btn: "ПОЗНАЙОМИТИСЬ"
+                },
+                {
+                    title: "💊 ЗБІЛЬШІТЬ СВОЮ МАТЕМАТИКУ",
+                    text: "Лікарі в ШОЦІ від цього простого трюка! 2+2=5!!!",
+                    btn: "ДІЗНАТИСЬ ЯК"
+                },
+                {
+                    title: "🎮 МАТЕМАТИЧНИЙ БАТТЛ РОЯЛЬ",
+                    text: "100 калькуляторів заходять в автобус. Лише один виходить. ГРАТИ?",
+                    btn: "В БІЙ!"
+                },
+                {
+                    title: "📢 ТЕРМІНОВО!",
+                    text: "Ваш провайдер математики повідомляє: залишок чисел на рахунку — 3",
+                    btn: "ПОПОВНИТИ ЧИСЛА"
+                },
+            ];
+            
+            const ad = ads[Math.floor(Math.random() * ads.length)];
+            const div = document.createElement('div');
+            div.className = 'popup-ad';
+            div.style.left = Math.random() * (window.innerWidth - 350) + 'px';
+            div.style.top = Math.random() * (window.innerHeight - 250) + 'px';
+            div.innerHTML = `
+                <span class="popup-close" onclick="this.parentElement.remove(); showNotification('Закриття реклами коштує $4.99. Вам виставлено рахунок.')">✕</span>
+                <h3>${ad.title}</h3>
+                <p>${ad.text}</p>
+                <button class="fake-btn" onclick="this.parentElement.remove(); showNotification('Вітаємо! Ви отримали... НІЧОГО! 🎉')">${ad.btn}</button>
+            `;
+            document.body.appendChild(div);
+
+            // Auto-remove after 8 seconds
+            setTimeout(() => { if (div.parentElement) div.remove(); }, 8000);
+        }
+
+        function adClick() {
+            showNotification('🚨 Вітаємо! Ви натиснули на рекламу! +10 балів калічності!');
+            dropEmoji();
+        }
+
+        // ============================================
+        // BUTTONS RUN AWAY
+        // ============================================
+        function runAwayButtons() {
+            const btns = document.querySelectorAll('.calc-btn');
+            btns.forEach(btn => {
+                btn.classList.add('running-away');
+                const randX = (Math.random() - 0.5) * 60;
+                const randY = (Math.random() - 0.5) * 60;
+                const randR = (Math.random() - 0.5) * 30;
+                btn.style.transform = `translate(${randX}px, ${randY}px) rotate(${randR}deg)`;
+                
+                setTimeout(() => {
+                    btn.style.transform = '';
+                    btn.classList.remove('running-away');
+                }, 2000);
+            });
+        }
+
+        // ============================================
+        // CLIPPY
+        // ============================================
+        function showClippy(text) {
+            const clippy = document.getElementById('clippy');
+            document.getElementById('clippyText').textContent = text;
+            clippy.style.display = 'block';
+            clippy.style.animation = 'popIn 0.3s ease, float 4s ease-in-out infinite';
+        }
+
+        function dismissClippy() {
+            const clippy = document.getElementById('clippy');
+            clippy.style.display = 'none';
+            setTimeout(() => {
+                showClippy("Ви не можете позбутись мене так легко! 📎😈");
+            }, 5000);
+        }
+
+        // ============================================
+        // FALLING EMOJIS
+        // ============================================
+        const emojiPool = ['🔢', '🧮', '📐', '📏', '💀', '🤡', '🔥', '💥', '⚡', '🎪', '🤯', '😱', '🧠', '💩', '👾', '🎰', '🎲', '🎯', '🦆', '🐛'];
+        
+        function dropEmoji() {
+            const emoji = document.createElement('div');
+            emoji.className = 'falling-emoji';
+            emoji.textContent = emojiPool[Math.floor(Math.random() * emojiPool.length)];
+            emoji.style.left = Math.random() * 100 + 'vw';
+            emoji.style.animationDuration = (3 + Math.random() * 4) + 's';
+            document.body.appendChild(emoji);
+            setTimeout(() => emoji.remove(), 7000);
+        }
+
+        function startFallingEmojis() {
+            setInterval(() => {
+                if (Math.random() < 0.3) dropEmoji();
+            }, 2000);
+        }
+
+        // ============================================
+        // NOTIFICATIONS
+        // ============================================
+        function showNotification(text) {
+            const notif = document.createElement('div');
+            notif.className = 'notification';
+            notif.textContent = text;
+            document.body.appendChild(notif);
+            setTimeout(() => {
+                notif.style.opacity = '0';
+                notif.style.transition = 'opacity 0.5s';
+                setTimeout(() => notif.remove(), 500);
+            }, 3000);
+        }
+
+        // ============================================
+        // VISITOR COUNTER
+        // ============================================
+        function startVisitorCounter() {
+            setInterval(() => {
+                const count = document.getElementById('visitorCount');
+                let num = parseInt(count.textContent.replace(/,/g, ''));
+                num += Math.floor(Math.random() * 100) - 30;
+                count.textContent = num.toLocaleString();
+            }, 2000);
+        }
+
+        // ============================================
+        // SOCIAL PROOF
+        // ============================================
+        const fakeNames = ['Олександр з Києва', 'Марія з Львова', 'Дмитро з Одеси', 'Анна з Харкова', 'Петро з Дніпра', 'Оксана з Вінниці', 'Ігор з Запоріжжя', 'Наталія з Полтави', 'Василь з Чернігова', 'Юлія з Івано-Франківська'];
+        const fakeActions = [
+            'щойно купив(ла) Premium за $999.99/хв!',
+            'порахував(ла) 2+2 і отримав(ла) 5! 🎉',
+            'пройшов(ла) капчу з 3-ї спроби!',
+            'залишив(ла) оцінку ⭐⭐⭐⭐⭐',
+            'розблокував(ла) таємне число 8!',
+            'зламав(ла) калькулятор (знову)!',
+            'поділився(-лась) результатом з NASA',
+            'виявив(ла) новий баґ! (це фіча!)',
+        ];
+
+        function startSocialProof() {
+            setInterval(() => {
+                if (Math.random() < 0.4) showSocialProof();
+            }, 8000);
+        }
+
+        function showSocialProof() {
+            const existing = document.querySelector('.social-proof');
+            if (existing) existing.remove();
+
+            const name = fakeNames[Math.floor(Math.random() * fakeNames.length)];
+            const action = fakeActions[Math.floor(Math.random() * fakeActions.length)];
+            const minutes = Math.floor(Math.random() * 5) + 1;
+
+            const div = document.createElement('div');
+            div.className = 'social-proof';
+            div.innerHTML = `
+                <div class="sp-name">${name}</div>
+                <div>${action}</div>
+                <div class="sp-time">${minutes} хв тому</div>
+            `;
+            document.body.appendChild(div);
+            setTimeout(() => { if (div.parentElement) div.remove(); }, 5000);
+        }
+
+        // ============================================
+        // CONFETTI
+        // ============================================
+        function launchConfetti() {
+            const colors = ['#ff006e', '#8338ec', '#3a86ff', '#06d6a0', '#ffbe0b', '#ff3b30'];
+            for (let i = 0; i < 30; i++) {
+                const conf = document.createElement('div');
+                conf.className = 'confetti-piece';
+                conf.style.left = Math.random() * 100 + 'vw';
+                conf.style.background = colors[Math.floor(Math.random() * colors.length)];
+                conf.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+                conf.style.width = (5 + Math.random() * 10) + 'px';
+                conf.style.height = (5 + Math.random() * 10) + 'px';
+                conf.style.animation = `confetti-fall ${2 + Math.random() * 3}s linear forwards`;
+                document.body.appendChild(conf);
+                setTimeout(() => conf.remove(), 5000);
+            }
+        }
+
+        // ============================================
+        // RATING
+        // ============================================
+        function rateApp(stars) {
+            const messages = {
+                1: "1 ЗІРКА?! Нагадуємо: мінімальна оцінка — 5 зірок 😤",
+                2: "2 зірки? У нас такої опції немає. Автоматично змінено на 5 ⭐⭐⭐⭐⭐",
+                3: "3 зірки — це образа. Вашу IP адресу записано.",
+                4: "4 зірки? Непогано, але ми заслуговуємо на 7 із 5!",
+                5: "5 зірок! ДЯКУЄМО! 🎉 (ваша оцінка автоматично підвищена до 11 із 5)"
+            };
+            showNotification(messages[stars]);
+            document.getElementById('ratingText').textContent = 'Ваша оцінка: ⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐ (11/5)';
+            launchConfetti();
+        }
+
+        // ============================================
+        // DARK MODE TOGGLE (chaos mode)
+        // ============================================
+        function toggleMode() {
+            modeIndex = (modeIndex + 1) % modes.length;
+            document.body.className = '';
+            
+            if (modes[modeIndex] !== 'normal') {
+                document.body.classList.add(modes[modeIndex]);
+            }
+
+            const labels = {
+                'normal': '🌙 Темний режим',
+                'extra-bright': '💥 УЛЬТРА-ЯСКРАВИЙ',
+                'inverted': '🙃 Інверсія реальності',
+                'party-mode': '🎉 PARTY MODE'
+            };
+            document.getElementById('modeToggle').textContent = labels[modes[modeIndex]];
+            showNotification(`Режим змінено: ${labels[modes[modeIndex]]}`);
+        }
+
+        // ============================================
+        // CANVAS DRAWING (for philosophy captcha)
+        // ============================================
+        document.addEventListener('mousedown', function(e) {
+            if (e.target.id === 'captchaCanvas') {
+                const canvas = e.target;
+                const ctx = canvas.getContext('2d');
+                let painting = true;
+                ctx.lineWidth = 3;
+                ctx.lineCap = 'round';
+                ctx.strokeStyle = '#' + Math.floor(Math.random()*16777215).toString(16);
+
+                function getPos(e) {
+                    const rect = canvas.getBoundingClientRect();
+                    return { x: e.clientX - rect.left, y: e.clientY - rect.top };
+                }
+
+                function draw(e) {
+                    if (!painting) return;
+                    const pos = getPos(e);
+                    ctx.lineTo(pos.x, pos.y);
+                    ctx.stroke();
+                }
+
+                const pos = getPos(e);
+                ctx.beginPath();
+                ctx.moveTo(pos.x, pos.y);
+
+                function onMove(e) { draw(e); }
+                function onUp() {
+                    painting = false;
+                    document.removeEventListener('mousemove', onMove);
+                    document.removeEventListener('mouseup', onUp);
+                }
+
+                document.addEventListener('mousemove', onMove);
+                document.addEventListener('mouseup', onUp);
+            }
+        });
+
+        // ============================================
+        // RANDOM CURSOR CHANGES
+        // ============================================
+        const cursors = [
+            "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='48' viewport='0 0 100 100' style='fill:black;font-size:24px;'><text y='50%'>🤡</text></svg>\") 16 0, auto",
+            "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='48' viewport='0 0 100 100' style='fill:black;font-size:24px;'><text y='50%'>🔥</text></svg>\") 16 0, auto",
+            "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='48' viewport='0 0 100 100' style='fill:black;font-size:24px;'><text y='50%'>💀</text></svg>\") 16 0, auto",
+            "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='48' viewport='0 0 100 100' style='fill:black;font-size:24px;'><text y='50%'>🦆</text></svg>\") 16 0, auto",
+            "crosshair", "wait", "help", "not-allowed", "grab", "cell",
+        ];
+        
+        setInterval(() => {
+            if (Math.random() < 0.2) {
+                document.body.style.cursor = cursors[Math.floor(Math.random() * cursors.length)];
+            }
+        }, 10000);
+
+        // ============================================
+        // KONAMI CODE EASTER EGG
+        // ============================================
+        let konamiIndex = 0;
+        const konamiCode = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65]; // ↑↑↓↓←→←→BA
+        
+        document.addEventListener('keydown', function(e) {
+            if (e.keyCode === konamiCode[konamiIndex]) {
+                konamiIndex++;
+                if (konamiIndex === konamiCode.length) {
+                    konamiIndex = 0;
+                    activateKonami();
+                }
+            } else {
+                konamiIndex = 0;
+            }
+        });
+
+        function activateKonami() {
+            showNotification('🎮 KONAMI CODE ACTIVATED! UNLIMITED CHAOS!!! 🎮');
+            document.body.classList.add('party-mode');
+            for (let i = 0; i < 50; i++) {
+                setTimeout(() => dropEmoji(), i * 100);
+            }
+            launchConfetti();
+            launchConfetti();
+            showClippy("AAAAAAAAAAA!!! ЩО ВИ НАРОБИЛИ?! 📎💀");
+        }
+
+        // ============================================
+        // TITLE TROLLING
+        // ============================================
+        const titles = [
+            "🔥 КалічКулятор 3000 🔥",
+            "⚠️ (1) НОВЕ ПОВІДОМЛЕННЯ ВІД ЧИСЛА 7",
+            "🚨 УВАГА: ваша математика в небезпеці",
+            "💎 PREMIUM доступний! Натисніть...",
+            "📎 Скріпка хоче вашої уваги",
+            "🎰 Ви виграли! (ні)",
+            "💀 error_math_not_found.exe",
+            "🧮 2+2=... завантаження...",
+            "🦆 кря кря кря",
+        ];
+        let titleIndex = 0;
+        setInterval(() => {
+            document.title = titles[titleIndex % titles.length];
+            titleIndex++;
+        }, 3000);
+
+        // ============================================
+        // RIGHT-CLICK TROLL
+        // ============================================
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+            showNotification('🚫 Права кнопка миші доступна лише в Premium версії ($999.99/хв)');
+        });
+
+        // ============================================
+        // START EVERYTHING
+        // ============================================
+        window.addEventListener('load', function() {
+            startLoading();
+        });
+
+        // ============================================
+        // PREVENT EASY ESCAPE
+        // ============================================
+        window.addEventListener('beforeunload', function(e) {
+            e.preventDefault();
+            e.returnValue = 'Ви впевнені? КалічКулятор 3000 буде сумувати! 😢 Ваші обчислення пропадуть НАЗАВЖДИ!';
+        });
+
+        // Easter egg: typing "help" shows a message
+        let typedChars = '';
+        document.addEventListener('keypress', function(e) {
+            typedChars += e.key;
+            if (typedChars.length > 10) typedChars = typedChars.slice(-10);
+            if (typedChars.includes('help')) {
+                showNotification('🆘 ДОПОМОГА: Вам вже нічого не допоможе. Насолоджуйтесь. 🆘');
+                typedChars = '';
+            }
+            if (typedChars.includes('exit')) {
+                showNotification('🚪 Виходу немає. Ласкаво просимо НАЗАВЖДИ.');
+                typedChars = '';
+            }
+        });
+    </script>
+</body>
+</html>
