@@ -53,9 +53,9 @@
             100% { color: red; }
         }
 
-        @keyframes spin { 
-            from { transform: rotate(0deg); } 
-            to { transform: rotate(360deg); } 
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
         }
 
         @keyframes float {
@@ -741,7 +741,7 @@
             justify-content: space-between;
         }
 
-        /* FOOTER */  
+        /* FOOTER */
         .footer {
             text-align: center;
             padding: 30px;
@@ -852,6 +852,59 @@
         ::-webkit-scrollbar-track { background: linear-gradient(red,orange,yellow,green,blue,violet); }
         ::-webkit-scrollbar-thumb { background: #333; border-radius: 10px; }
         ::-webkit-scrollbar-thumb:hover { background: #555; }
+
+        /* ============================================
+           АДАПТИВНІСТЬ ДЛЯ ТЕЛЕФОНІВ І ПЛАНШЕТІВ
+           (Щоб калічність вміщалась в екран)
+           ============================================ */
+        @media screen and (max-width: 768px) {
+            /* Зменшуємо шрифти заголовків */
+            .header h1 { font-size: 1.5em; letter-spacing: 1px; }
+            .header .subtitle { font-size: 0.9em; }
+            .marquee-banner { font-size: 12px; }
+
+            /* Калькулятор: робимо кнопки меншими */
+            .calc-display { padding: 10px; }
+            .calc-display .display-value { font-size: 1.5em; }
+            .calc-display .watermark { font-size: 18px; }
+            .calc-btn { padding: 15px 5px; font-size: 16px; }
+
+            /* Пекельна капча */
+            .modal { padding: 15px; width: 95%; max-height: 90vh; }
+            .captcha-images div { font-size: 30px; }
+            /* Робимо так, щоб кнопки у вікторині йшли в стовпчик, а не стискалися */
+            .captcha-section div[style*="display: flex"] { flex-direction: column; gap: 8px; }
+
+            /* Пекельні Cookies */
+            .cookie-hell { padding: 15px; }
+            .cookie-reject { font-size: 16px; padding: 15px 20px; animation: none; /* вимикаємо шейк, бо на телефоні неможливо натиснути */ }
+            .cookie-options { grid-template-columns: 1fr; } /* Одна колонка замість сітки */
+
+            /* Вірус та Преміум */
+            .virus-warning { width: 90% !important; max-width: 350px; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; }
+            .virus-warning .vw-body { flex-direction: column; align-items: center; text-align: center; }
+            .premium-modal { padding: 20px; width: 90%; }
+            .premium-modal .price { font-size: 30px; }
+            .premium-buy { padding: 10px 20px; font-size: 14px; }
+
+            /* Поп-апи та помічники */
+            .popup-ad { width: 90%; left: 5% !important; max-width: 300px; }
+            .clippy { width: 120px; padding: 10px; bottom: 10px; right: 10px; }
+            .clippy-face { font-size: 30px; }
+            .clippy-text { font-size: 10px; }
+            .social-proof { max-width: 200px; font-size: 10px; bottom: 10px; left: 10px; padding: 8px; }
+
+            /* Завантаження */
+            .loading-screen h1 { font-size: 16px; }
+            .loading-bar-container { width: 80%; }
+        }
+
+        @media screen and (max-width: 400px) {
+            /* Для дуже вузьких екранів */
+            .calc-btn { padding: 10px 2px; font-size: 14px; }
+            .ad-banner h3 { font-size: 11px; }
+            .ad-banner p { font-size: 14px; }
+        }
     </style>
 </head>
 <body>
@@ -1035,7 +1088,7 @@
         let cookieAccepted = false;
         let premiumShown = false;
         let virusShown = false;
-        let historyItems = [];
+        let historyItems =[];
         let chaosLevel = 0;
         let modeIndex = 0;
         const modes = ['normal', 'extra-bright', 'inverted', 'party-mode'];
@@ -1043,7 +1096,7 @@
         // ============================================
         // LOADING SCREEN
         // ============================================
-        const loadingMessages = [
+        const loadingMessages =[
             "Ініціалізація калічності...",
             "Завантаження математичних помилок...",
             "Калібрування неточності...",
@@ -1064,7 +1117,7 @@
             "ФІНАЛЬНЕ завантаження...",
         ];
 
-        const loadingTips = [
+        const loadingTips =[
             "💡 КалічКулятор 3000 був заборонений у 47 країнах",
             "💡 За статистикою, 9 з 10 математиків плачуть при використанні",
             "💡 КалічКулятор 3000 споживає більше RAM ніж Google Chrome",
@@ -1150,7 +1203,7 @@
 
         function rejectCookies() {
             // The reject button doesn't work, it just shows a message
-            const messages = [
+            const messages =[
                 "Гарна спроба! Але ні 😈",
                 "Цю кнопку ще не запрограмували",
                 "ERROR 418: I'm a teapot",
@@ -1161,7 +1214,7 @@
                 "Ви серйозно? 🤨",
             ];
             showNotification(messages[Math.floor(Math.random() * messages.length)]);
-            
+
             // Move the button somewhere random
             const btn = document.querySelector('.cookie-reject');
             btn.style.position = 'relative';
@@ -1217,7 +1270,7 @@
 
             // Show random clippy messages
             if (Math.random() < 0.1) {
-                const clippyMsgs = [
+                const clippyMsgs =[
                     "Ви впевнені, що це правильна цифра? 🤔",
                     "Мій кіт рахує краще за вас",
                     "Може краще скористатись рахівницею?",
@@ -1267,11 +1320,11 @@
                 if (operator && firstOperand !== null) {
                     const second = parseFloat(displayValue);
                     let result = calculate(firstOperand, operator, second);
-                    
+
                     // CHAOS: sometimes give wrong answers
                     const originalResult = result;
                     if (Math.random() < 0.35) {
-                        const chaos = [
+                        const chaos =[
                             () => result + Math.floor(Math.random() * 10) - 5,
                             () => result * -1,
                             () => Math.PI,
@@ -1291,7 +1344,7 @@
                     const expression = `${firstOperand} ${operator} ${second}`;
                     displayValue = String(result);
                     addHistory(expression, displayValue);
-                    
+
                     firstOperand = null;
                     operator = null;
                     waitingForSecond = false;
@@ -1299,7 +1352,7 @@
 
                     // Confetti on calculation
                     launchConfetti();
-                    
+
                     // Drop some emojis
                     for (let i = 0; i < 5; i++) {
                         setTimeout(() => dropEmoji(), i * 200);
@@ -1331,9 +1384,9 @@
         function addHistory(expression, result) {
             historyItems.unshift({ expression, result });
             if (historyItems.length > 5) historyItems.pop();
-            
+
             const list = document.getElementById('historyList');
-            list.innerHTML = historyItems.map(item => 
+            list.innerHTML = historyItems.map(item =>
                 `<div class="history-item"><span>${item.expression}</span><span>= ${item.result}</span></div>`
             ).join('');
         }
@@ -1342,7 +1395,7 @@
         // CAPTCHA FROM HELL
         // ============================================
         function showCaptcha(pendingValue) {
-            const captchaTypes = [
+            const captchaTypes =[
                 createMathCaptcha,
                 createImageCaptcha,
                 createPhilosophyCaptcha,
@@ -1350,9 +1403,9 @@
                 createEpicCaptcha,
                 createMultiStepCaptcha,
             ];
-            
+
             const captcha = captchaTypes[Math.floor(Math.random() * captchaTypes.length)]();
-            
+
             const overlay = document.createElement('div');
             overlay.className = 'modal-overlay';
             overlay.innerHTML = `
@@ -1407,14 +1460,14 @@
         }
 
         function createImageCaptcha() {
-            const emojis = ['🚗', '🚕', '🚙', '🚌', '🚎', '🏎️', '🚓', '🚑', '🐱', '🚒', '🐶', '🦊'];
+            const emojis =['🚗', '🚕', '🚙', '🚌', '🚎', '🏎️', '🚓', '🚑', '🐱', '🚒', '🐶', '🦊'];
             const shuffled = emojis.sort(() => Math.random() - 0.5);
             return {
                 html: `
                     <div class="captcha-section">
                         <label>🖼️ Оберіть ВСІ зображення з ТРАНСПОРТОМ (або котами, ми самі не знаємо):</label>
                         <div class="captcha-images">
-                            ${shuffled.slice(0, 9).map((e, i) => 
+                            ${shuffled.slice(0, 9).map((e, i) =>
                                 `<div onclick="this.classList.toggle('selected')" data-idx="${i}">${e}</div>`
                             ).join('')}
                         </div>
@@ -1659,19 +1712,39 @@
                     <button class="vw-btn" onclick="this.closest('.virus-warning').remove(); showVirusWarning(); showVirusWarning();">Скасувати</button>
                 </div>
             `;
-            
-            // Random position
-            div.style.left = Math.random() * (window.innerWidth - 400) + 'px';
-            div.style.top = Math.random() * (window.innerHeight - 300) + 'px';
-            div.style.transform = 'none';
-            
+
             document.body.appendChild(div);
 
-            // Make it draggable-ish (but it runs away)
+            if (window.innerWidth > 768) {
+                const maxL = Math.max(0, window.innerWidth - 400);
+                const maxT = Math.max(0, window.innerHeight - 300);
+                div.style.left = (Math.random() * maxL) + 'px';
+                div.style.top = (Math.random() * maxT) + 'px';
+                div.style.transform = 'none';
+            } else {
+                // Для мобільних забираємо inline-стилі, щоб спрацювало CSS-центрування
+                div.style.left = '';
+                div.style.top = '';
+                div.style.transform = '';
+            }
+
+            // Функція втечі вікна від миші
+            function moveVirus() {
+                if (window.innerWidth <= 768) return; // На мобільному не тікаємо, бо не впіймаєш!
+                const maxL = Math.max(0, window.innerWidth - 400);
+                const maxT = Math.max(0, window.innerHeight - 300);
+                div.style.left = (Math.random() * maxL) + 'px';
+                div.style.top = (Math.random() * maxT) + 'px';
+                div.style.transform = 'none';
+            }
+
             div.onmousedown = function(e) {
                 if (e.target.tagName === 'BUTTON' || e.target.tagName === 'SPAN') return;
-                div.style.left = Math.random() * (window.innerWidth - 400) + 'px';
-                div.style.top = Math.random() * (window.innerHeight - 300) + 'px';
+                moveVirus();
+            };
+            div.ontouchstart = function(e) {
+                if (e.target.tagName === 'BUTTON' || e.target.tagName === 'SPAN') return;
+                moveVirus();
             };
         }
 
@@ -1679,7 +1752,7 @@
         // POPUP ADS
         // ============================================
         function showPopupAd() {
-            const ads = [
+            const ads =[
                 {
                     title: "🎉 ВИ ВИГРАЛИ iPhone 47!!!",
                     text: "Ви наш 1,000,000-й відвідувач! Натисніть щоб отримати приз!",
@@ -1706,12 +1779,16 @@
                     btn: "ПОПОВНИТИ ЧИСЛА"
                 },
             ];
-            
+
             const ad = ads[Math.floor(Math.random() * ads.length)];
             const div = document.createElement('div');
             div.className = 'popup-ad';
-            div.style.left = Math.random() * (window.innerWidth - 350) + 'px';
-            div.style.top = Math.random() * (window.innerHeight - 250) + 'px';
+
+            const maxLeft = Math.max(0, window.innerWidth - 350);
+            const maxTop = Math.max(0, window.innerHeight - 250);
+            div.style.left = (Math.random() * maxLeft) + 'px';
+            div.style.top = (Math.random() * maxTop) + 'px';
+
             div.innerHTML = `
                 <span class="popup-close" onclick="this.parentElement.remove(); showNotification('Закриття реклами коштує $4.99. Вам виставлено рахунок.')">✕</span>
                 <h3>${ad.title}</h3>
@@ -1740,7 +1817,7 @@
                 const randY = (Math.random() - 0.5) * 60;
                 const randR = (Math.random() - 0.5) * 30;
                 btn.style.transform = `translate(${randX}px, ${randY}px) rotate(${randR}deg)`;
-                
+
                 setTimeout(() => {
                     btn.style.transform = '';
                     btn.classList.remove('running-away');
@@ -1769,8 +1846,8 @@
         // ============================================
         // FALLING EMOJIS
         // ============================================
-        const emojiPool = ['🔢', '🧮', '📐', '📏', '💀', '🤡', '🔥', '💥', '⚡', '🎪', '🤯', '😱', '🧠', '💩', '👾', '🎰', '🎲', '🎯', '🦆', '🐛'];
-        
+        const emojiPool =['🔢', '🧮', '📐', '📏', '💀', '🤡', '🔥', '💥', '⚡', '🎪', '🤯', '😱', '🧠', '💩', '👾', '🎰', '🎲', '🎯', '🦆', '🐛'];
+
         function dropEmoji() {
             const emoji = document.createElement('div');
             emoji.className = 'falling-emoji';
@@ -1817,8 +1894,8 @@
         // ============================================
         // SOCIAL PROOF
         // ============================================
-        const fakeNames = ['Олександр з Києва', 'Марія з Львова', 'Дмитро з Одеси', 'Анна з Харкова', 'Петро з Дніпра', 'Оксана з Вінниці', 'Ігор з Запоріжжя', 'Наталія з Полтави', 'Василь з Чернігова', 'Юлія з Івано-Франківська'];
-        const fakeActions = [
+        const fakeNames =['Олександр з Києва', 'Марія з Львова', 'Дмитро з Одеси', 'Анна з Харкова', 'Петро з Дніпра', 'Оксана з Вінниці', 'Ігор з Запоріжжя', 'Наталія з Полтави', 'Василь з Чернігова', 'Юлія з Івано-Франківська'];
+        const fakeActions =[
             'щойно купив(ла) Premium за $999.99/хв!',
             'порахував(ла) 2+2 і отримав(ла) 5! 🎉',
             'пройшов(ла) капчу з 3-ї спроби!',
@@ -1858,7 +1935,7 @@
         // CONFETTI
         // ============================================
         function launchConfetti() {
-            const colors = ['#ff006e', '#8338ec', '#3a86ff', '#06d6a0', '#ffbe0b', '#ff3b30'];
+            const colors =['#ff006e', '#8338ec', '#3a86ff', '#06d6a0', '#ffbe0b', '#ff3b30'];
             for (let i = 0; i < 30; i++) {
                 const conf = document.createElement('div');
                 conf.className = 'confetti-piece';
@@ -1895,7 +1972,7 @@
         function toggleMode() {
             modeIndex = (modeIndex + 1) % modes.length;
             document.body.className = '';
-            
+
             if (modes[modeIndex] !== 'normal') {
                 document.body.classList.add(modes[modeIndex]);
             }
@@ -1924,11 +2001,16 @@
 
                 function getPos(e) {
                     const rect = canvas.getBoundingClientRect();
+                    // Підтримка touch
+                    if(e.touches && e.touches.length > 0) {
+                        return { x: e.touches[0].clientX - rect.left, y: e.touches[0].clientY - rect.top };
+                    }
                     return { x: e.clientX - rect.left, y: e.clientY - rect.top };
                 }
 
                 function draw(e) {
                     if (!painting) return;
+                    if(e.type === 'touchmove') e.preventDefault();
                     const pos = getPos(e);
                     ctx.lineTo(pos.x, pos.y);
                     ctx.stroke();
@@ -1943,24 +2025,40 @@
                     painting = false;
                     document.removeEventListener('mousemove', onMove);
                     document.removeEventListener('mouseup', onUp);
+                    document.removeEventListener('touchmove', onMove);
+                    document.removeEventListener('touchend', onUp);
                 }
 
                 document.addEventListener('mousemove', onMove);
                 document.addEventListener('mouseup', onUp);
+                document.addEventListener('touchmove', onMove, {passive: false});
+                document.addEventListener('touchend', onUp);
             }
         });
+
+        // Для телефонів, щоб можна було малювати на canvas першим дотиком
+        document.addEventListener('touchstart', function(e) {
+            if (e.target.id === 'captchaCanvas') {
+                e.preventDefault(); // Забороняємо скрол
+                const ev = new MouseEvent('mousedown', {
+                    clientX: e.touches[0].clientX,
+                    clientY: e.touches[0].clientY
+                });
+                e.target.dispatchEvent(ev);
+            }
+        }, {passive: false});
 
         // ============================================
         // RANDOM CURSOR CHANGES
         // ============================================
-        const cursors = [
+        const cursors =[
             "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='48' viewport='0 0 100 100' style='fill:black;font-size:24px;'><text y='50%'>🤡</text></svg>\") 16 0, auto",
             "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='48' viewport='0 0 100 100' style='fill:black;font-size:24px;'><text y='50%'>🔥</text></svg>\") 16 0, auto",
             "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='48' viewport='0 0 100 100' style='fill:black;font-size:24px;'><text y='50%'>💀</text></svg>\") 16 0, auto",
             "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='48' viewport='0 0 100 100' style='fill:black;font-size:24px;'><text y='50%'>🦆</text></svg>\") 16 0, auto",
             "crosshair", "wait", "help", "not-allowed", "grab", "cell",
         ];
-        
+
         setInterval(() => {
             if (Math.random() < 0.2) {
                 document.body.style.cursor = cursors[Math.floor(Math.random() * cursors.length)];
@@ -1971,8 +2069,8 @@
         // KONAMI CODE EASTER EGG
         // ============================================
         let konamiIndex = 0;
-        const konamiCode = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65]; // ↑↑↓↓←→←→BA
-        
+        const konamiCode =[38, 38, 40, 40, 37, 39, 37, 39, 66, 65]; // ↑↑↓↓←→←→BA
+
         document.addEventListener('keydown', function(e) {
             if (e.keyCode === konamiCode[konamiIndex]) {
                 konamiIndex++;
@@ -1999,7 +2097,7 @@
         // ============================================
         // TITLE TROLLING
         // ============================================
-        const titles = [
+        const titles =[
             "🔥 КалічКулятор 3000 🔥",
             "⚠️ (1) НОВЕ ПОВІДОМЛЕННЯ ВІД ЧИСЛА 7",
             "🚨 УВАГА: ваша математика в небезпеці",
