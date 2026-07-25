@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>cmpdchtrOS</title>
+  <link rel="stylesheet" type="text/css" href="style.css" />
+</head>
+<body>
+
+  <!-- Windows 7 Start Menu -->
+  <div id="startMenu" class="start-menu hidden">
+    <div class="start-left">
+      <div class="start-item" id="startWelcome">
+        <img src="./avatar.jpg" alt="Welcome">
+        <div>
+          <strong>Welcome</strong>
+          <span>Start here</span>
+        </div>
+      </div>
+      <div class="start-item" id="startNotes">
+        <img src="./notes_icon.jpg" alt="Notes">
+        <div>
+          <strong>Notes</strong>
+          <span>Text editor</span>
+        </div>
+      </div>
+      <div class="start-item" id="startExplorer">
+        <img src="./explorer_icon.jpg" alt="My Projects">
+        <div>
+          <strong>My Projects</strong>
+          <span>File Explorer</span>
+        </div>
+      </div>
+      <div class="start-item" id="startMinesweeper">
+        <img src="./mine_icon.jpg" alt="Minesweeper">
+        <div>
+          <strong>Minesweeper</strong>
+          <span>Classic Game</span>
+        </div>
+      </div>
+      
+      <div class="start-search">
+        <input type="text" id="startSearchInput" placeholder="Search programs and files">
+      </div>
+    </div>
+    <div class="start-right">
+      <div class="user-profile">
+        <img src="./avatar.jpg" alt="User">
+        <span>Hacker</span>
+      </div>
+      <ul>
+        <li id="startDocs">Documents</li>
+        <li id="startPics">Pictures</li>
+        <li id="startMusic">Music</li>
+        <hr>
+        <li id="startCP">Control Panel</li>
+        <li id="startDP">Devices and Printers</li>
+        <li id="startDef">Default Programs</li>
+        <hr>
+        <li id="startShutdown" style="margin-top:auto;">Shut down ▸</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Welcome Window -->
+  <div id="welcome" class="window">
+    <div id="welcomeheader" class="windowheader">
+      <p class="headertext">Welcome to cmpdchtrOS</p>
+      <div class="window-controls">
+        <div id="welcomemin" class="win-btn"><svg viewBox="0 0 10 10"><line x1="1" y1="8" x2="9" y2="8"></line></svg></div>
+        <div id="welcomemax" class="win-btn"><svg viewBox="0 0 10 10"><rect x="1" y="1" width="8" height="8" fill="none"></rect></svg></div>
+        <div id="welcomeclose" class="win-btn closebutton"><svg viewBox="0 0 10 10"><line x1="1" y1="1" x2="9" y2="9"></line><line x1="9" y1="1" x2="1" y2="9"></line></svg></div>
+      </div>
+    </div>
+    <div class="window-content">
+      <img src="./avatar.jpg" alt="My Avatar" class="avatar" />
+      <div>
+        <h1>Hello, Hacker</h1>
+        <h2>Your personal OS is online.</h2>
+      </div>
+      <p>
+        My personal corner of the web. <strong>System initialized.</strong> Ready to deploy new ideas and build cool stuff for the Star Dance jam.
+      </p>
+      <div class="links">
+        <a href="https://stardance.hackclub.com/@cmpdchtr" target="_blank" class="btn">Star Dance</a>
+        <a href="https://github.com/cmpdchtr" target="_blank" class="btn">GitHub</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Notes App Window (Initially hidden) -->
+  <div id="notesApp" class="window hidden" style="left: 450px; top: 150px; width: 550px; height: 350px;">
+    <div id="notesAppheader" class="windowheader">
+      <p class="headertext">Notes</p>
+      <div class="window-controls">
+        <div id="notesAppmin" class="win-btn"><svg viewBox="0 0 10 10"><line x1="1" y1="8" x2="9" y2="8"></line></svg></div>
+        <div id="notesAppmax" class="win-btn"><svg viewBox="0 0 10 10"><rect x="1" y="1" width="8" height="8" fill="none"></rect></svg></div>
+        <div id="notesAppclose" class="win-btn closebutton"><svg viewBox="0 0 10 10"><line x1="1" y1="1" x2="9" y2="9"></line><line x1="9" y1="1" x2="1" y2="9"></line></svg></div>
+      </div>
+    </div>
+    <div class="window-content app-layout">
+      <div class="sidebar" style="display:flex; flex-direction:column;">
+        <div id="notesSidebar" style="flex:1; overflow-y:auto;"></div>
+        <button id="newNoteBtn" style="padding: 10px; margin: 5px; cursor:pointer; background:#e0e0e0; border:1px solid #ccc; border-radius:3px; font-family:inherit;">+ New Note</button>
+      </div>
+      <div class="main-content" id="notesContent" style="display:flex; flex-direction:column;">
+        <input type="text" id="noteTitle" style="font-size:20px; font-weight:bold; border:none; outline:none; color:#003399; margin-bottom:5px; width:100%; background:transparent; font-family:inherit;" value="Welcome to Notes">
+        <h2 id="noteDate" style="color:#888; font-size:12px; margin-bottom:15px; margin-top:0;">Just now</h2>
+        <textarea id="noteText" style="flex:1; font-size:14px; border:none; outline:none; resize:none; font-family:inherit; background:transparent;">Select a note from the sidebar.</textarea>
+      </div>
+    </div>
+  </div>
+
+  <!-- Minesweeper App Window -->
+  <div id="minesweeperApp" class="window hidden" style="left: 300px; top: 120px; width: auto; height: auto;">
+    <div id="minesweeperAppheader" class="windowheader">
+      <p class="headertext">Minesweeper</p>
+      <div class="window-controls">
+        <div id="minesweeperAppmin" class="win-btn"><svg viewBox="0 0 10 10"><line x1="1" y1="8" x2="9" y2="8"></line></svg></div>
+        <div id="minesweeperAppclose" class="win-btn closebutton"><svg viewBox="0 0 10 10"><line x1="1" y1="1" x2="9" y2="9"></line><line x1="9" y1="1" x2="1" y2="9"></line></svg></div>
+      </div>
+    </div>
+    <div class="window-content" style="padding: 10px; background: #c0c0c0; border: 2px solid #fff; border-right-color: #808080; border-bottom-color: #808080; display:flex; flex-direction:column; align-items:center; gap:10px;">
+      
+      <!-- Top Panel -->
+      <div style="display:flex; justify-content:space-between; align-items:center; width:100%; padding:5px; background:#c0c0c0; border:2px solid #808080; border-right-color:#fff; border-bottom-color:#fff; box-sizing:border-box;">
+        <div class="mine-lcd" id="mineCountDisplay">010</div>
+        <div class="mine-face" id="mineFace">😊</div>
+        <div class="mine-lcd" id="mineTimerDisplay">000</div>
+      </div>
+      
+      <!-- Grid -->
+      <div id="mineGrid" class="mine-grid"></div>
+    </div>
+  </div>
+
+  <!-- Hacker Explorer (Projects) App -->
+  <div id="explorerApp" class="window hidden" style="left: 150px; top: 100px; width: 700px; height: 450px;">
+    <div id="explorerAppheader" class="windowheader">
+      <p class="headertext">My Projects</p>
+      <div class="window-controls">
+        <div id="explorerAppmin" class="win-btn"><svg viewBox="0 0 10 10"><line x1="1" y1="8" x2="9" y2="8"></line></svg></div>
+        <div id="explorerAppmax" class="win-btn"><svg viewBox="0 0 10 10"><rect x="1" y="1" width="8" height="8" fill="none"></rect></svg></div>
+        <div id="explorerAppclose" class="win-btn closebutton"><svg viewBox="0 0 10 10"><line x1="1" y1="1" x2="9" y2="9"></line><line x1="9" y1="1" x2="1" y2="9"></line></svg></div>
+      </div>
+    </div>
+    <div class="window-content app-layout" style="flex-direction: column !important; gap: 0;">
+      <div class="explorer-toolbar">
+        <div class="nav-btns">
+          <button class="nav-btn" id="explBackBtn">←</button>
+          <button class="nav-btn" id="explFwdBtn">→</button>
+        </div>
+        <div class="address-bar">
+          <img src="./explorer_icon.jpg" class="address-icon">
+          <span class="path-text">Computer ▸ OS (C:) ▸ Users ▸ Hacker ▸ Projects</span>
+        </div>
+      </div>
+      <div class="explorer-body">
+        <div class="explorer-sidebar">
+          <ul id="explorerSidebarList">
+            <li class="tree-header">★ Favorites</li>
+            <li>Desktop</li>
+            <li>Downloads</li>
+            <li>Recent Places</li>
+            <li class="tree-header">🖿 Libraries</li>
+            <li>Documents</li>
+            <li>Music</li>
+            <li>Pictures</li>
+            <li class="tree-header">💻 Computer</li>
+            <li class="tree-active">OS (C:)</li>
+          </ul>
+        </div>
+        <div class="explorer-content" id="projectsGrid"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Windows 7 Taskbar -->
+  <div class="taskbar">
+    <div id="welcomeopen" class="start-btn">
+      <div class="start-orb"></div>
+    </div>
+    <div id="taskbarApps" class="taskbar-apps"></div>
+    <div class="taskbar-right">
+      <p id="timeElement">00:00:00</p>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
