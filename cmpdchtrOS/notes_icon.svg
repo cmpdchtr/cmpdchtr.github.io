@@ -1,0 +1,22 @@
+<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="note" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f0fbff" />
+      <stop offset="100%" stop-color="#80d5ff" />
+    </linearGradient>
+    <filter id="shadowN">
+      <feDropShadow dx="1" dy="2" stdDeviation="2" flood-color="#000" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  <rect x="12" y="16" width="40" height="42" rx="2" fill="url(#note)" stroke="#1a8cff" stroke-width="1.5" filter="url(#shadowN)"/>
+  <!-- lines -->
+  <line x1="16" y1="28" x2="52" y2="28" stroke="#8cd5ff" stroke-width="1.5"/>
+  <line x1="16" y1="36" x2="52" y2="36" stroke="#8cd5ff" stroke-width="1.5"/>
+  <line x1="16" y1="44" x2="52" y2="44" stroke="#8cd5ff" stroke-width="1.5"/>
+  <line x1="16" y1="52" x2="36" y2="52" stroke="#8cd5ff" stroke-width="1.5"/>
+  <!-- spirals -->
+  <path d="M 18 12 C 16 12 16 20 18 20 C 20 20 20 12 18 12 Z" fill="#333" filter="url(#shadowN)"/>
+  <path d="M 28 12 C 26 12 26 20 28 20 C 30 20 30 12 28 12 Z" fill="#333" filter="url(#shadowN)"/>
+  <path d="M 38 12 C 36 12 36 20 38 20 C 40 20 40 12 38 12 Z" fill="#333" filter="url(#shadowN)"/>
+  <path d="M 48 12 C 46 12 46 20 48 20 C 50 20 50 12 48 12 Z" fill="#333" filter="url(#shadowN)"/>
+</svg>

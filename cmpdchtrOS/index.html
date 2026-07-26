@@ -4,49 +4,73 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>cmpdchtrOS</title>
-  <link rel="stylesheet" type="text/css" href="style.css" />
+  <link rel="stylesheet" type="text/css" href="style.css?v=3" />
 </head>
 <body>
+
+  <!-- Context Menu -->
+  <div id="contextMenu" class="context-menu hidden">
+    <ul>
+      <li id="cm-new-note">New Note</li>
+      <li id="cm-minesweeper">Play Minesweeper</li>
+      <hr>
+      <li id="cm-personalize">Personalize</li>
+    </ul>
+  </div>
 
   <!-- Windows 7 Start Menu -->
   <div id="startMenu" class="start-menu hidden">
     <div class="start-left">
       <div class="start-item" id="startWelcome">
-        <img src="./avatar.jpg" alt="Welcome">
+        <img src="./avatar.png" alt="Welcome">
         <div>
           <strong>Welcome</strong>
           <span>Start here</span>
         </div>
       </div>
       <div class="start-item" id="startNotes">
-        <img src="./notes_icon.jpg" alt="Notes">
+        <img src="./notes_icon.svg" alt="Notes">
         <div>
           <strong>Notes</strong>
           <span>Text editor</span>
         </div>
       </div>
       <div class="start-item" id="startExplorer">
-        <img src="./explorer_icon.jpg" alt="My Projects">
+        <img src="./explorer_icon.svg" alt="My Projects">
         <div>
           <strong>My Projects</strong>
           <span>File Explorer</span>
         </div>
       </div>
+      <div class="start-item" id="startBrowser">
+        <img src="./browser_icon.svg" alt="Browser">
+        <div>
+          <strong>Internet Browser</strong>
+          <span>Web Surfing</span>
+        </div>
+      </div>
+      <div class="start-item" id="startCalc">
+        <img src="./calc_icon.svg" alt="Calculator">
+        <div>
+          <strong>Calculator</strong>
+          <span>Math</span>
+        </div>
+      </div>
       <div class="start-item" id="startMinesweeper">
-        <img src="./mine_icon.jpg" alt="Minesweeper">
+        <img src="./mine_icon.svg" alt="Minesweeper">
         <div>
           <strong>Minesweeper</strong>
           <span>Classic Game</span>
         </div>
       </div>
-      
+
       <div class="start-search">
         <input type="text" id="startSearchInput" placeholder="Search programs and files">
       </div>
     </div>
     <div class="start-right">
       <div class="user-profile">
-        <img src="./avatar.jpg" alt="User">
+        <img src="./avatar.png" alt="User">
         <span>Hacker</span>
       </div>
       <ul>
@@ -66,7 +90,10 @@
   <!-- Welcome Window -->
   <div id="welcome" class="window">
     <div id="welcomeheader" class="windowheader">
-      <p class="headertext">Welcome to cmpdchtrOS</p>
+      <div style="display:flex; align-items:center; gap:5px; margin-left:4px;">
+        <img src="./avatar.png" style="width:16px; height:16px; border-radius:2px;">
+        <p class="headertext">Welcome to cmpdchtrOS</p>
+      </div>
       <div class="window-controls">
         <div id="welcomemin" class="win-btn"><svg viewBox="0 0 10 10"><line x1="1" y1="8" x2="9" y2="8"></line></svg></div>
         <div id="welcomemax" class="win-btn"><svg viewBox="0 0 10 10"><rect x="1" y="1" width="8" height="8" fill="none"></rect></svg></div>
@@ -74,7 +101,7 @@
       </div>
     </div>
     <div class="window-content">
-      <img src="./avatar.jpg" alt="My Avatar" class="avatar" />
+      <img src="./avatar.png" alt="My Avatar" class="avatar" />
       <div>
         <h1>Hello, Hacker</h1>
         <h2>Your personal OS is online.</h2>
@@ -92,7 +119,10 @@
   <!-- Notes App Window (Initially hidden) -->
   <div id="notesApp" class="window hidden" style="left: 450px; top: 150px; width: 550px; height: 350px;">
     <div id="notesAppheader" class="windowheader">
-      <p class="headertext">Notes</p>
+      <div style="display:flex; align-items:center; gap:5px; margin-left:4px;">
+        <img src="./notes_icon.svg" style="width:16px; height:16px; border-radius:2px;">
+        <p class="headertext">Notes</p>
+      </div>
       <div class="window-controls">
         <div id="notesAppmin" class="win-btn"><svg viewBox="0 0 10 10"><line x1="1" y1="8" x2="9" y2="8"></line></svg></div>
         <div id="notesAppmax" class="win-btn"><svg viewBox="0 0 10 10"><rect x="1" y="1" width="8" height="8" fill="none"></rect></svg></div>
@@ -115,21 +145,24 @@
   <!-- Minesweeper App Window -->
   <div id="minesweeperApp" class="window hidden" style="left: 300px; top: 120px; width: auto; height: auto;">
     <div id="minesweeperAppheader" class="windowheader">
-      <p class="headertext">Minesweeper</p>
+      <div style="display:flex; align-items:center; gap:5px; margin-left:4px;">
+        <img src="./mine_icon.svg" style="width:16px; height:16px; border-radius:2px;">
+        <p class="headertext">Minesweeper</p>
+      </div>
       <div class="window-controls">
         <div id="minesweeperAppmin" class="win-btn"><svg viewBox="0 0 10 10"><line x1="1" y1="8" x2="9" y2="8"></line></svg></div>
         <div id="minesweeperAppclose" class="win-btn closebutton"><svg viewBox="0 0 10 10"><line x1="1" y1="1" x2="9" y2="9"></line><line x1="9" y1="1" x2="1" y2="9"></line></svg></div>
       </div>
     </div>
     <div class="window-content" style="padding: 10px; background: #c0c0c0; border: 2px solid #fff; border-right-color: #808080; border-bottom-color: #808080; display:flex; flex-direction:column; align-items:center; gap:10px;">
-      
+
       <!-- Top Panel -->
       <div style="display:flex; justify-content:space-between; align-items:center; width:100%; padding:5px; background:#c0c0c0; border:2px solid #808080; border-right-color:#fff; border-bottom-color:#fff; box-sizing:border-box;">
         <div class="mine-lcd" id="mineCountDisplay">010</div>
         <div class="mine-face" id="mineFace">😊</div>
         <div class="mine-lcd" id="mineTimerDisplay">000</div>
       </div>
-      
+
       <!-- Grid -->
       <div id="mineGrid" class="mine-grid"></div>
     </div>
@@ -138,7 +171,10 @@
   <!-- Hacker Explorer (Projects) App -->
   <div id="explorerApp" class="window hidden" style="left: 150px; top: 100px; width: 700px; height: 450px;">
     <div id="explorerAppheader" class="windowheader">
-      <p class="headertext">My Projects</p>
+      <div style="display:flex; align-items:center; gap:5px; margin-left:4px;">
+        <img src="./explorer_icon.svg" style="width:16px; height:16px; border-radius:2px;">
+        <p class="headertext">My Projects</p>
+      </div>
       <div class="window-controls">
         <div id="explorerAppmin" class="win-btn"><svg viewBox="0 0 10 10"><line x1="1" y1="8" x2="9" y2="8"></line></svg></div>
         <div id="explorerAppmax" class="win-btn"><svg viewBox="0 0 10 10"><rect x="1" y="1" width="8" height="8" fill="none"></rect></svg></div>
@@ -152,7 +188,7 @@
           <button class="nav-btn" id="explFwdBtn">→</button>
         </div>
         <div class="address-bar">
-          <img src="./explorer_icon.jpg" class="address-icon">
+          <img src="./explorer_icon.svg" class="address-icon">
           <span class="path-text">Computer ▸ OS (C:) ▸ Users ▸ Hacker ▸ Projects</span>
         </div>
       </div>
@@ -171,7 +207,79 @@
             <li class="tree-active">OS (C:)</li>
           </ul>
         </div>
-        <div class="explorer-content" id="projectsGrid"></div>
+        <div class="explorer-content" id="projectsGrid">
+          <!-- Dynamically populated -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Browser App Window -->
+  <div id="browserApp" class="window hidden" style="left: 100px; top: 50px; width: 700px; height: 450px;">
+    <div id="browserAppheader" class="windowheader">
+      <div style="display:flex; align-items:center; gap:5px; margin-left:4px;">
+        <img src="./browser_icon.svg" style="width:16px; height:16px; border-radius:2px;">
+        <p class="headertext">Internet Browser</p>
+      </div>
+      <div class="window-controls">
+        <div id="browserAppmin" class="win-btn"><svg viewBox="0 0 10 10"><line x1="1" y1="8" x2="9" y2="8"></line></svg></div>
+        <div id="browserAppmax" class="win-btn"><svg viewBox="0 0 10 10"><rect x="1" y="1" width="8" height="8" fill="none"></rect></svg></div>
+        <div id="browserAppclose" class="win-btn closebutton"><svg viewBox="0 0 10 10"><line x1="1" y1="1" x2="9" y2="9"></line><line x1="9" y1="1" x2="1" y2="9"></line></svg></div>
+      </div>
+    </div>
+    <div class="window-content" style="padding:0; gap:0;">
+      <div class="explorer-toolbar" style="padding: 5px;">
+        <div class="nav-btns">
+          <button class="nav-btn" id="browserBack" title="Back" style="font-size:12px;">🡠</button>
+          <button class="nav-btn" id="browserForward" title="Forward" style="font-size:12px;">🡢</button>
+          <button class="nav-btn" id="browserReload" title="Reload" style="font-size:12px;">↻</button>
+        </div>
+        <div class="address-bar" style="flex:1;">
+          <input type="text" id="browserUrl" value="https://hackclub.com" title="Address" style="width:100%; border:none; outline:none; font-size:13px;" />
+        </div>
+        <button id="browserGo" title="Go" style="padding: 2px 10px; cursor:pointer;">Go</button>
+      </div>
+      <iframe id="browserFrame" src="https://hackclub.com" style="flex:1; border:none; width:100%; height:100%; background:#fff;"></iframe>
+    </div>
+  </div>
+
+  <!-- Calculator App Window -->
+  <div id="calculatorApp" class="window hidden" style="left: 450px; top: 150px; width: 250px; height: 350px;">
+    <div id="calculatorAppheader" class="windowheader">
+      <div style="display:flex; align-items:center; gap:5px; margin-left:4px;">
+        <img src="./calc_icon.svg" style="width:16px; height:16px; border-radius:2px;">
+        <p class="headertext">Calculator</p>
+      </div>
+      <div class="window-controls">
+        <div id="calculatorAppmin" class="win-btn"><svg viewBox="0 0 10 10"><line x1="1" y1="8" x2="9" y2="8"></line></svg></div>
+        <div id="calculatorAppclose" class="win-btn closebutton"><svg viewBox="0 0 10 10"><line x1="1" y1="1" x2="9" y2="9"></line><line x1="9" y1="1" x2="1" y2="9"></line></svg></div>
+      </div>
+    </div>
+    <div class="window-content" style="padding:10px; background:#d9e4f1; gap:10px;">
+      <div class="calc-display" id="calcDisplay">0</div>
+      <div class="calc-grid">
+        <button class="calc-btn span-2" onclick="calcAction('C')">C</button>
+        <button class="calc-btn" onclick="calcAction('DEL')">←</button>
+        <button class="calc-btn calc-op" onclick="calcAction('/')">÷</button>
+
+        <button class="calc-btn" onclick="calcAction('7')">7</button>
+        <button class="calc-btn" onclick="calcAction('8')">8</button>
+        <button class="calc-btn" onclick="calcAction('9')">9</button>
+        <button class="calc-btn calc-op" onclick="calcAction('*')">×</button>
+
+        <button class="calc-btn" onclick="calcAction('4')">4</button>
+        <button class="calc-btn" onclick="calcAction('5')">5</button>
+        <button class="calc-btn" onclick="calcAction('6')">6</button>
+        <button class="calc-btn calc-op" onclick="calcAction('-')">-</button>
+
+        <button class="calc-btn" onclick="calcAction('1')">1</button>
+        <button class="calc-btn" onclick="calcAction('2')">2</button>
+        <button class="calc-btn" onclick="calcAction('3')">3</button>
+        <button class="calc-btn calc-op" onclick="calcAction('+')">+</button>
+
+        <button class="calc-btn span-2" onclick="calcAction('0')">0</button>
+        <button class="calc-btn" onclick="calcAction('.')">.</button>
+        <button class="calc-btn calc-op" onclick="calcAction('=')">=</button>
       </div>
     </div>
   </div>
@@ -187,6 +295,6 @@
     </div>
   </div>
 
-  <script src="script.js"></script>
+  <script src="script.js?v=5"></script>
 </body>
 </html>

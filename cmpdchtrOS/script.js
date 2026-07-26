@@ -33,12 +33,68 @@ function initWindow(appId) {
   if(btnClose) btnClose.addEventListener("click", function() { closeWindow(appId); });
   if(btnMin) btnMin.addEventListener("click", function() { minimizeWindow(appId); });
   if(btnMax) btnMax.addEventListener("click", function() { toggleMaximize(appId); });
+
+  makeResizable(winEl);
+}
+
+function makeResizable(winEl) {
+  var resizerR = document.createElement('div');
+  resizerR.className = 'resizer resizer-r';
+  var resizerB = document.createElement('div');
+  resizerB.className = 'resizer resizer-b';
+  var resizerBR = document.createElement('div');
+  resizerBR.className = 'resizer resizer-br';
+
+  winEl.appendChild(resizerR);
+  winEl.appendChild(resizerB);
+  winEl.appendChild(resizerBR);
+
+  resizerR.addEventListener('mousedown', function(e) { initResize(e, 'r'); });
+  resizerB.addEventListener('mousedown', function(e) { initResize(e, 'b'); });
+  resizerBR.addEventListener('mousedown', function(e) { initResize(e, 'br'); });
+
+  var currentResizer = null;
+  var startX, startY, startW, startH;
+
+  function initResize(e, type) {
+    var config = windowsConfig[winEl.id];
+    if (config && config.isMaximized) return;
+    e.preventDefault();
+    e.stopPropagation();
+    currentResizer = type;
+    startX = e.clientX;
+    startY = e.clientY;
+    startW = parseInt(document.defaultView.getComputedStyle(winEl).width, 10);
+    startH = parseInt(document.defaultView.getComputedStyle(winEl).height, 10);
+
+    document.addEventListener('mousemove', Resize, false);
+    document.addEventListener('mouseup', stopResize, false);
+    bringToFront(winEl);
+    winEl.style.transition = "none";
+  }
+
+  function Resize(e) {
+    if (currentResizer.includes('r')) {
+      var newW = startW + (e.clientX - startX);
+      if (newW > 250) winEl.style.width = newW + 'px';
+    }
+    if (currentResizer.includes('b')) {
+      var newH = startH + (e.clientY - startY);
+      if (newH > 150) winEl.style.height = newH + 'px';
+    }
+  }
+
+  function stopResize(e) {
+    document.removeEventListener('mousemove', Resize, false);
+    document.removeEventListener('mouseup', stopResize, false);
+    winEl.style.transition = "";
+  }
 }
 
 function openWindow(appId, appName, iconSrc) {
   var winEl = document.getElementById(appId);
   if (!windowsConfig[appId]) initWindow(appId);
-  
+
   var config = windowsConfig[appId];
 
   // Restore logic
@@ -136,7 +192,7 @@ function dragElement(elmnt) {
 
   function dragMouseDown(e) {
     var config = windowsConfig[elmnt.id];
-    if (config && config.isMaximized) return; 
+    if (config && config.isMaximized) return;
     e = e || window.event;
     e.preventDefault();
     pos3 = e.clientX;
@@ -193,39 +249,49 @@ startSearchInput.addEventListener("input", function(e) {
 });
 
 document.getElementById("startWelcome").addEventListener("click", function() {
-  openWindow("welcome", "Welcome", "./avatar.jpg");
+  openWindow("welcome", "Welcome", "./avatar.png");
   startMenu.classList.add("hidden");
 });
 
 document.getElementById("startNotes").addEventListener("click", function() {
-  openWindow("notesApp", "Notes", "./notes_icon.jpg");
+  openWindow("notesApp", "Notes", "./notes_icon.svg");
+  startMenu.classList.add("hidden");
+});
+
+document.getElementById("startBrowser").addEventListener("click", function() {
+  openWindow("browserApp", "Internet Browser", "./browser_icon.svg");
+  startMenu.classList.add("hidden");
+});
+
+document.getElementById("startCalc").addEventListener("click", function() {
+  openWindow("calculatorApp", "Calculator", "./calc_icon.svg");
   startMenu.classList.add("hidden");
 });
 
 document.getElementById("startExplorer").addEventListener("click", function() {
-  openWindow("explorerApp", "My Projects", "./explorer_icon.jpg");
+  openWindow("explorerApp", "My Projects", "./explorer_icon.svg");
   navigateTo("Computer ▸ OS (C:) ▸ Users ▸ Hacker ▸ Projects");
   startMenu.classList.add("hidden");
 });
 
 document.getElementById("startMinesweeper").addEventListener("click", function() {
-  openWindow("minesweeperApp", "Minesweeper", "./mine_icon.jpg");
+  openWindow("minesweeperApp", "Minesweeper", "./mine_icon.svg");
   startMenu.classList.add("hidden");
 });
 
 // Start Right Links
 document.getElementById("startDocs").addEventListener("click", () => {
-  openWindow("explorerApp", "My Projects", "./explorer_icon.jpg");
+  openWindow("explorerApp", "My Projects", "./explorer_icon.svg");
   navigateTo("Documents");
   startMenu.classList.add("hidden");
 });
 document.getElementById("startPics").addEventListener("click", () => {
-  openWindow("explorerApp", "My Projects", "./explorer_icon.jpg");
+  openWindow("explorerApp", "My Projects", "./explorer_icon.svg");
   navigateTo("Pictures");
   startMenu.classList.add("hidden");
 });
 document.getElementById("startMusic").addEventListener("click", () => {
-  openWindow("explorerApp", "My Projects", "./explorer_icon.jpg");
+  openWindow("explorerApp", "My Projects", "./explorer_icon.svg");
   navigateTo("Music");
   startMenu.classList.add("hidden");
 });
@@ -248,9 +314,9 @@ document.getElementById("startShutdown").addEventListener("click", function() {
   document.body.style.alignItems = "center";
   document.body.style.flexDirection = "column";
   document.body.style.color = "#fff";
-  
+
   document.body.innerHTML = `
-    <img src="./avatar.jpg" style="width:80px; height:80px; border-radius:50%; margin-bottom:20px; border:2px solid #fff; box-shadow:0 0 20px rgba(255,255,255,0.5);">
+    <img src="./avatar.png" style="width:80px; height:80px; border-radius:50%; margin-bottom:20px; border:2px solid #fff; box-shadow:0 0 20px rgba(255,255,255,0.5);">
     <h2 style="font-weight:300;">Shutting down...</h2>
   `;
 });
@@ -259,7 +325,7 @@ document.getElementById("startShutdown").addEventListener("click", function() {
 initWindow("welcome");
 windowsConfig["welcome"].taskbarBtn = document.createElement("div");
 windowsConfig["welcome"].taskbarBtn.className = "taskbar-app active";
-windowsConfig["welcome"].taskbarBtn.innerHTML = '<img src="./avatar.jpg" alt="Icon"><span>Welcome</span>';
+windowsConfig["welcome"].taskbarBtn.innerHTML = '<img src="./avatar.png" alt="Icon"><span>Welcome</span>';
 windowsConfig["welcome"].taskbarBtn.addEventListener("click", function() {
     var winEl = document.getElementById("welcome");
     if (winEl.classList.contains("hidden")) restoreWindow("welcome");
@@ -292,7 +358,7 @@ function renderNotesSidebar() {
     item.className = "sidebar-item";
     if (index === activeNoteIndex) item.classList.add("selected");
     item.innerHTML = `<strong>${note.title || "Untitled"}</strong><span>${note.date}</span>`;
-    
+
     item.addEventListener("click", function() {
       activeNoteIndex = index;
       renderNotesSidebar();
@@ -341,46 +407,47 @@ loadNoteIntoView(0);
 // --- Explorer App Content Logic (FULL FILESYSTEM) ---
 var fileSystem = {
   "Computer ▸ OS (C:) ▸ Users ▸ Hacker ▸ Projects": [
-    { name: "WebOS", type: "folder", icon: "./explorer_icon.jpg", target: "Computer ▸ OS (C:) ▸ Users ▸ Hacker ▸ Projects ▸ WebOS" },
-    { name: "StarDance.exe", type: "app", icon: "./avatar.jpg", app: "welcome" },
-    { name: "Minesweeper.exe", type: "app", icon: "./mine_icon.jpg", app: "minesweeperApp" },
-    { name: "Ideas.txt", type: "file", icon: "./notes_icon.jpg" }
+    { name: "WebOS", type: "folder", icon: "./explorer_icon.svg", target: "Computer ▸ OS (C:) ▸ Users ▸ Hacker ▸ Projects ▸ WebOS" },
+    { name: "Hacker Notes", type: "file", icon: "./notes_icon.svg", app: "notesApp" },
+    { name: "Minesweeper", type: "app", icon: "./mine_icon.svg", app: "minesweeperApp" },
+    { name: "Internet Browser", type: "app", icon: "./browser_icon.svg", app: "browserApp" },
+    { name: "Calculator", type: "app", icon: "./calc_icon.svg", app: "calculatorApp" }
   ],
   "Computer ▸ OS (C:) ▸ Users ▸ Hacker ▸ Projects ▸ WebOS": [
-    { name: "index.html", type: "file", icon: "./notes_icon.jpg" },
-    { name: "style.css", type: "file", icon: "./notes_icon.jpg" },
-    { name: "script.js", type: "file", icon: "./notes_icon.jpg" }
+    { name: "index.html", type: "file", icon: "./notes_icon.svg" },
+    { name: "style.css", type: "file", icon: "./notes_icon.svg" },
+    { name: "script.js", type: "file", icon: "./notes_icon.svg" }
   ],
   "Desktop": [],
   "Downloads": [
-    { name: "StarDance.exe", type: "app", icon: "./avatar.jpg", app: "welcome" }
+    { name: "StarDance.exe", type: "app", icon: "./avatar.png", app: "welcome" }
   ],
   "Documents": [
-    { name: "Ideas.txt", type: "file", icon: "./notes_icon.jpg" }
+    { name: "Ideas.txt", type: "file", icon: "./notes_icon.svg" }
   ],
   "Music": [],
   "Pictures": [],
   "Computer": [
-    { name: "OS (C:)", type: "folder", icon: "./explorer_icon.jpg", target: "Computer ▸ OS (C:)" }
+    { name: "OS (C:)", type: "folder", icon: "./explorer_icon.svg", target: "Computer ▸ OS (C:)" }
   ],
   "Computer ▸ OS (C:)": [
-    { name: "Users", type: "folder", icon: "./explorer_icon.jpg", target: "Computer ▸ OS (C:) ▸ Users" },
-    { name: "Windows", type: "folder", icon: "./explorer_icon.jpg", target: "Computer ▸ OS (C:) ▸ Windows" }
+    { name: "Users", type: "folder", icon: "./explorer_icon.svg", target: "Computer ▸ OS (C:) ▸ Users" },
+    { name: "Windows", type: "folder", icon: "./explorer_icon.svg", target: "Computer ▸ OS (C:) ▸ Windows" }
   ],
   "Computer ▸ OS (C:) ▸ Users": [
-    { name: "Hacker", type: "folder", icon: "./explorer_icon.jpg", target: "Computer ▸ OS (C:) ▸ Users ▸ Hacker" }
+    { name: "Hacker", type: "folder", icon: "./explorer_icon.svg", target: "Computer ▸ OS (C:) ▸ Users ▸ Hacker" }
   ],
   "Computer ▸ OS (C:) ▸ Users ▸ Hacker": [
-    { name: "Desktop", type: "folder", icon: "./explorer_icon.jpg", target: "Desktop" },
-    { name: "Downloads", type: "folder", icon: "./explorer_icon.jpg", target: "Downloads" },
-    { name: "Documents", type: "folder", icon: "./explorer_icon.jpg", target: "Documents" },
-    { name: "Projects", type: "folder", icon: "./explorer_icon.jpg", target: "Computer ▸ OS (C:) ▸ Users ▸ Hacker ▸ Projects" }
+    { name: "Desktop", type: "folder", icon: "./explorer_icon.svg", target: "Desktop" },
+    { name: "Downloads", type: "folder", icon: "./explorer_icon.svg", target: "Downloads" },
+    { name: "Documents", type: "folder", icon: "./explorer_icon.svg", target: "Documents" },
+    { name: "Projects", type: "folder", icon: "./explorer_icon.svg", target: "Computer ▸ OS (C:) ▸ Users ▸ Hacker ▸ Projects" }
   ],
   "Computer ▸ OS (C:) ▸ Windows": [
-    { name: "System32", type: "folder", icon: "./explorer_icon.jpg", target: "Computer ▸ OS (C:) ▸ Windows ▸ System32" }
+    { name: "System32", type: "folder", icon: "./explorer_icon.svg", target: "Computer ▸ OS (C:) ▸ Windows ▸ System32" }
   ],
   "Computer ▸ OS (C:) ▸ Windows ▸ System32": [
-    { name: "cmd.exe", type: "app", icon: "./explorer_icon.jpg", app: "welcome" }
+    { name: "cmd.exe", type: "app", icon: "./explorer_icon.svg", app: "welcome" }
   ]
 };
 
@@ -396,16 +463,16 @@ var sidebarListItems = document.querySelectorAll("#explorerSidebarList li:not(.t
 
 function navigateTo(path, recordHistory = true) {
   if (!fileSystem[path]) fileSystem[path] = []; // fallback if path is empty
-  
+
   if (recordHistory && path !== currentPath) {
     pathHistory = pathHistory.slice(0, historyIndex + 1);
     pathHistory.push(path);
     historyIndex++;
   }
-  
+
   currentPath = path;
   pathText.innerText = path;
-  
+
   // Highlight sidebar
   sidebarListItems.forEach(item => {
     item.classList.remove("tree-active");
@@ -450,36 +517,36 @@ sidebarListItems.forEach(item => {
 function renderExplorer() {
   projectsGrid.innerHTML = "";
   var data = fileSystem[currentPath] || [];
-  
+
   if (data.length === 0) {
     projectsGrid.innerHTML = "<div style='width:100%; padding:20px; color:#888; font-size:14px;'>This folder is empty.</div>";
     return;
   }
-  
+
   data.forEach(function(proj) {
     var item = document.createElement("div");
     item.className = "file-icon";
     item.innerHTML = `<img src="${proj.icon}" alt="icon"><span>${proj.name}</span>`;
-    
+
     item.addEventListener("click", function(e) {
       e.stopPropagation();
       var items = projectsGrid.getElementsByClassName("file-icon");
       for(var i=0; i<items.length; i++) items[i].classList.remove("selected");
       item.classList.add("selected");
     });
-    
+
     item.addEventListener("dblclick", function(e) {
       e.stopPropagation();
       item.classList.remove("selected");
       if (proj.type === "file") {
-        openWindow("notesApp", "Notes", "./notes_icon.jpg");
+        openWindow("notesApp", "Notes", "./notes_icon.svg");
       } else if (proj.type === "app") {
         openWindow(proj.app, proj.name, proj.icon);
       } else if (proj.type === "folder") {
         navigateTo(proj.target);
       }
     });
-    
+
     projectsGrid.appendChild(item);
   });
 }
@@ -526,20 +593,20 @@ function initMinesweeper() {
   mineTimerEl.innerText = pad(0);
   mineFaceEl.innerHTML = mineFaces.normal;
   clearInterval(mineInterval);
-  
+
   mineGridData = [];
   mineGridEl.innerHTML = "";
-  
+
   for (let r = 0; r < mineConfig.rows; r++) {
     let row = [];
     for (let c = 0; c < mineConfig.cols; c++) {
       let cell = { r, c, isMine: false, revealed: false, flagged: false, count: 0 };
       row.push(cell);
-      
+
       let div = document.createElement("div");
       div.className = "mine-cell";
       div.id = `mine_${r}_${c}`;
-      
+
       div.addEventListener("mousedown", (e) => {
         if (mineGameOver) return;
         if (e.button === 0 && !cell.revealed && !cell.flagged) {
@@ -555,7 +622,7 @@ function initMinesweeper() {
         e.preventDefault();
         toggleFlag(r, c);
       });
-      
+
       mineGridEl.appendChild(div);
     }
     mineGridData.push(row);
@@ -593,7 +660,7 @@ function toggleFlag(r, c) {
   if (mineGameOver) return;
   let cell = mineGridData[r][c];
   if (cell.revealed) return;
-  
+
   let el = document.getElementById(`mine_${r}_${c}`);
   if (cell.flagged) {
     cell.flagged = false;
@@ -611,7 +678,7 @@ function revealMine(r, c) {
   if (mineGameOver) return;
   let cell = mineGridData[r][c];
   if (cell.revealed || cell.flagged) return;
-  
+
   if (mineFirstClick) {
     mineFirstClick = false;
     placeMines(r, c);
@@ -621,11 +688,11 @@ function revealMine(r, c) {
       mineTimerEl.innerText = pad(mineTimer);
     }, 1000);
   }
-  
+
   let el = document.getElementById(`mine_${r}_${c}`);
   cell.revealed = true;
   el.classList.add("revealed");
-  
+
   if (cell.isMine) {
     mineGameOver = true;
     clearInterval(mineInterval);
@@ -640,7 +707,7 @@ function revealMine(r, c) {
     }
     return;
   }
-  
+
   if (cell.count > 0) {
     el.innerText = cell.count;
     el.classList.add(`mine-${cell.count}`);
@@ -680,3 +747,143 @@ function checkWin() {
 
 mineFaceEl.addEventListener("click", initMinesweeper);
 initMinesweeper();
+
+// --- Context Menu Logic ---
+var ctxMenu = document.getElementById("contextMenu");
+
+document.addEventListener("contextmenu", function(e) {
+  // Allow default context menu on inputs and textareas
+  if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') {
+    ctxMenu.classList.add("hidden");
+    return;
+  }
+
+  e.preventDefault();
+
+  // Keep menu within window bounds
+  var menuWidth = 220; // Width from CSS
+  var left = e.pageX;
+  var top = e.pageY;
+
+  if (left + menuWidth > window.innerWidth) {
+    left = window.innerWidth - menuWidth;
+  }
+
+  ctxMenu.style.left = left + "px";
+  ctxMenu.style.top = top + "px";
+  ctxMenu.classList.remove("hidden");
+});
+
+document.addEventListener("click", function(e) {
+  if (!ctxMenu.contains(e.target)) {
+    ctxMenu.classList.add("hidden");
+  }
+});
+
+document.getElementById("cm-new-note").addEventListener("click", function() {
+  openWindow("notesApp", "Notes", "./notes_icon.svg");
+  document.getElementById("newNoteBtn").click();
+  ctxMenu.classList.add("hidden");
+});
+
+document.getElementById("cm-minesweeper").addEventListener("click", function() {
+  openWindow("minesweeperApp", "Minesweeper", "./mine_icon.svg");
+  ctxMenu.classList.add("hidden");
+});
+
+document.getElementById("cm-personalize").addEventListener("click", function() {
+  alert("Personalization feature coming soon!");
+  ctxMenu.classList.add("hidden");
+});
+
+// --- Browser Logic ---
+var browserUrl = document.getElementById("browserUrl");
+var browserFrame = document.getElementById("browserFrame");
+
+var browserHistory = ["https://hackclub.com"];
+var browserHistoryIndex = 0;
+
+function navigateBrowser(url, isHistoryAction) {
+  if (!url) {
+    url = browserUrl.value.trim();
+    if (url === "") return;
+
+    if (!url.includes(".")) {
+      url = "https://" + url + ".com";
+    } else if (!url.startsWith("http://") && !url.startsWith("https://")) {
+      url = "https://" + url;
+    }
+  }
+
+  if (!isHistoryAction) {
+    browserHistory = browserHistory.slice(0, browserHistoryIndex + 1);
+    if (browserHistory[browserHistoryIndex] !== url) {
+      browserHistory.push(url);
+      browserHistoryIndex++;
+    }
+  }
+
+  browserUrl.value = url;
+
+  // Show visual feedback that it's loading
+  browserFrame.style.opacity = "0.3";
+
+  // Bypass X-Frame-Options using a public proxy so any site works!
+  var finalUrl = url;
+  if (!url.includes("hackclub.com") && !url.includes("example.com")) {
+    finalUrl = "https://api.allorigins.win/raw?url=" + encodeURIComponent(url);
+  }
+
+  browserFrame.onload = function() {
+    browserFrame.style.opacity = "1";
+  };
+
+  browserFrame.src = finalUrl;
+}
+
+document.getElementById("browserGo").addEventListener("click", function() { navigateBrowser(null, false); });
+
+browserUrl.addEventListener("keydown", function(e) {
+  if (e.key === "Enter") {
+    navigateBrowser(null, false);
+  }
+});
+
+document.getElementById("browserBack").addEventListener("click", function() {
+  if (browserHistoryIndex > 0) {
+    browserHistoryIndex--;
+    navigateBrowser(browserHistory[browserHistoryIndex], true);
+  }
+});
+
+document.getElementById("browserForward").addEventListener("click", function() {
+  if (browserHistoryIndex < browserHistory.length - 1) {
+    browserHistoryIndex++;
+    navigateBrowser(browserHistory[browserHistoryIndex], true);
+  }
+});
+
+document.getElementById("browserReload").addEventListener("click", function() {
+  browserFrame.src = browserHistory[browserHistoryIndex];
+});
+
+// --- Calculator Logic ---
+var calcValue = "";
+window.calcAction = function(val) {
+  var display = document.getElementById("calcDisplay");
+  if (val === 'C') {
+    calcValue = "";
+  } else if (val === 'DEL') {
+    calcValue = calcValue.toString().slice(0, -1);
+  } else if (val === '=') {
+    try {
+      calcValue = eval(calcValue).toString();
+    } catch(e) {
+      calcValue = "Error";
+    }
+  } else {
+    if (calcValue === "Error") calcValue = "";
+    calcValue += val;
+  }
+  display.innerText = calcValue || "0";
+}

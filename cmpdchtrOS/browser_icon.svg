@@ -1,0 +1,15 @@
+<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="iebg" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#4db8ff"/>
+      <stop offset="100%" stop-color="#0066cc"/>
+    </radialGradient>
+    <filter id="ieshad">
+      <feDropShadow dx="1" dy="2" stdDeviation="2" flood-color="#000" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  <circle cx="32" cy="32" r="22" fill="url(#iebg)" stroke="#003366" stroke-width="2" filter="url(#ieshad)"/>
+  <!-- Abstract orbit / ring -->
+  <ellipse cx="32" cy="32" rx="28" ry="10" transform="rotate(-30 32 32)" fill="none" stroke="#ffcc00" stroke-width="3" opacity="0.9" filter="url(#ieshad)"/>
+  <text x="32" y="42" font-family="Arial, sans-serif" font-weight="bold" font-size="30" fill="#fff" text-anchor="middle" font-style="italic">e</text>
+</svg>

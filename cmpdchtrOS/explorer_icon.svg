@@ -1,0 +1,23 @@
+<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="back" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#fdf4c8" />
+      <stop offset="100%" stop-color="#eed589" />
+    </linearGradient>
+    <linearGradient id="front" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#fde487" />
+      <stop offset="100%" stop-color="#dda534" />
+    </linearGradient>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="2" stdDeviation="2" flood-color="#000" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  <!-- Back flap -->
+  <path d="M 6 20 L 16 20 L 22 26 L 56 26 C 58 26 60 28 60 30 L 60 52 C 60 54 58 56 56 56 L 6 56 C 4 56 2 54 2 52 L 2 24 C 2 22 4 20 6 20 Z" fill="url(#back)" stroke="#c6a34d" stroke-width="1"/>
+  <!-- Papers inside -->
+  <rect x="8" y="24" width="46" height="30" fill="#fff" stroke="#ccc" stroke-width="1"/>
+  <!-- Front flap (tilted) -->
+  <path d="M 4 56 L 16 32 C 17 30 19 29 21 29 L 62 29 C 64 29 65 31 64 33 L 54 56 C 53 58 51 59 49 59 L 6 59 C 3 59 2 57 4 56 Z" fill="url(#front)" stroke="#b78326" stroke-width="1" filter="url(#shadow)"/>
+  <!-- Highlight -->
+  <path d="M 18 31 L 59 31" stroke="#fff" stroke-width="1.5" stroke-opacity="0.6" fill="none"/>
+</svg>
